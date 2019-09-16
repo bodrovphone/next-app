@@ -1,0 +1,25 @@
+{
+  "editor.fontSize": 14,
+  "window.title": "${activeEditorLong}${separator}${rootName}",
+  "workbench.colorTheme": "Monokai Dimmed",
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "search.location": "sidebar",
+  "window.zoomLevel": 0,
+  "terminal.integrated.shell.osx": "zsh",
+  "breadcrumbs.enabled": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.iconTheme": "vscode-icons",
+  "editor.cursorBlinking": "phase",
+  "javascript.preferences.quoteStyle": "single",
+  "git.autofetch": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "files.insertFinalNewline": false,
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "editor.formatOnSave": true
+}
