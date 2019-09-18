@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BaseLayout from "../components/layouts/BaseLayout";
 import SuperComponent from "../components/superComponent";
-import { log } from "util";
+import axios from "axios";
 
 export default class index extends SuperComponent {
   constructor(props) {
@@ -10,6 +10,13 @@ export default class index extends SuperComponent {
       title: "I am Index Page"
     };
     console.log("constructor");
+  }
+
+  static async getInitialProps() {
+    let response;
+    await new Promise(resolve => setTimeout(resolve, 50));
+    response = "test";
+    return { test: response };
   }
 
   componentDidMount() {
@@ -29,7 +36,9 @@ export default class index extends SuperComponent {
   };
 
   render() {
-    console.log("render");
+    console.log("I have rendered");
+    const { test } = this.props;
+    console.log(test);
     return (
       <BaseLayout>
         <h1>I am a Header!</h1>
