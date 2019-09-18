@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import BaseLayout from "../components/layouts/BaseLayout";
-import { withRouter } from "next/router";
+import React, { Component } from 'react';
+import BaseLayout from '../components/layouts/BaseLayout';
+import { withRouter } from 'next/router';
 
 class Porfolio extends Component {
   constructor(props) {
@@ -8,8 +8,6 @@ class Porfolio extends Component {
   }
 
   render() {
-    console.log("portfolio", this.props);
-
     return (
       <BaseLayout>
         <h1>Hello I am a Portfolio-single Page!</h1>
