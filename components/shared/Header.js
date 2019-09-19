@@ -1,32 +1,37 @@
 import React, { Component, Fragment } from "react";
 import Link from "next/link";
-import "../../styles/main.scss";
+import { Link as NextLink } from "../../routes";
 
 export default class Header extends Component {
   render() {
     return (
       <Fragment>
-        <p className="custom">I am styled p element</p>
-        <p className="customClassFromFile">I am styled p element</p>
+        <Link href="/">
+          <a>Home</a>
+        </Link>
         <Link href="/about">
           <a>About</a>
         </Link>
-        <br />
         <Link href="/blogs">
           <a>Blogs</a>
         </Link>
-        <br />
         <Link href="/portfolios">
           <a>Porfolio</a>
         </Link>
-        <br />
         <Link href="/cv">
           <a>CV</a>
         </Link>
+        <NextLink route="/test/2" params={{ id: "2" }}>
+          <a>Test 2</a>
+        </NextLink>
+        <NextLink route="/test/5" params={{ id: "5" }}>
+          <a>Test 5</a>
+        </NextLink>
         <style jsx>
           {`
             a {
               font-size: 20px;
+              margin: 0 5px;
             }
           `}
         </style>
