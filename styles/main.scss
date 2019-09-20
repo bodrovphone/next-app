@@ -1,9 +1,23 @@
-@import "./shared/fonts";
+@import './shared/fonts';
+// Pages
+@import './shared/index';
+// Header
+@import './shared/header';
 
 html,
 body {
-  font-family: "PoorStory", "Arial";
+  height: 100%;
+  width: 100%;
+  font-family: 'PoorStory', 'Arial';
 }
-.customClassFromFile {
-  color: blue;
+
+.self-typed {
+  font-size: 21px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: white;
+}
+
+.absolute {
+  position: absolute;
 }
