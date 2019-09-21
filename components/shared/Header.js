@@ -1,34 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Link from 'next/link';
 
-// export default class Header extends Component {
-//   render() {
-//     return (
-//       <Fragment>
-
-//         <Link href="/blogs">
-//           <a>Blogs</a>
-//         </Link>
-//         <Link href="/portfolios">
-//           <a>Porfolio</a>
-//         </Link>
-//         <Link href="/cv">
-//           <a>CV</a>
-//         </Link>
-//         <style jsx>
-//           {`
-//             a {
-//               font-size: 20px;
-//               margin: 0 5px;
-//             }
-//           `}
-//         </style>
-//       </Fragment>
-//     );
-//   }
-// }
-
-// import React from 'react';
 import {
   Collapse,
   Navbar,
@@ -45,6 +17,13 @@ const BsNavLink = ({ href, title }) => (
       <a className="nav-link port-navbar-link">{title}</a>
     </Link>
   </NavItem>
+);
+
+const Login = () => (
+  <span className="nav-link port-navbar-link clickable"> Login </span>
+);
+const Logout = () => (
+  <span className="nav-link port-navbar-link clickable"> Logout </span>
 );
 
 export default class Header extends React.Component {
@@ -78,6 +57,12 @@ export default class Header extends React.Component {
               <BsNavLink href="/about" title="About" />
               <BsNavLink href="/portfolios" title="Portfolio" />
               <BsNavLink href="/cv" title="Blog" />
+              <NavItem className="port-navbar-item">
+                <Login />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <Logout />
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
