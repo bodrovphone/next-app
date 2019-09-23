@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import Link from 'next/link';
+import React, { Component, Fragment } from "react";
+import Link from "next/link";
+import { useAuth0 } from "../../services/react-auth0-wrapper";
+
+const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
 import {
   Collapse,
@@ -9,7 +12,7 @@ import {
   Nav,
   NavItem,
   NavLink
-} from 'reactstrap';
+} from "reactstrap";
 
 const BsNavLink = ({ href, title }) => (
   <NavItem className="port-navbar-item">
@@ -20,10 +23,22 @@ const BsNavLink = ({ href, title }) => (
 );
 
 const Login = () => (
-  <span className="nav-link port-navbar-link clickable"> Login </span>
+  <span
+    className="nav-link port-navbar-link clickable"
+    onClick={() => loginWithRedirect({})}
+  >
+    {" "}
+    Login{" "}
+  </span>
 );
 const Logout = () => (
-  <span className="nav-link port-navbar-link clickable"> Logout </span>
+  <span
+    className="nav-link port-navbar-link clickable"
+    onClick={() => logout()}
+  >
+    {" "}
+    Logout{" "}
+  </span>
 );
 
 export default class Header extends React.Component {
@@ -57,12 +72,15 @@ export default class Header extends React.Component {
               <BsNavLink href="/about" title="About" />
               <BsNavLink href="/portfolios" title="Portfolio" />
               <BsNavLink href="/cv" title="Blog" />
-              <NavItem className="port-navbar-item">
-                <Login />
-              </NavItem>
-              <NavItem className="port-navbar-item">
-                <Logout />
-              </NavItem>
+              {!isAuthenticated ? (
+                <NavItem className="port-navbar-item">
+                  <Login />
+                </NavItem>
+              ) : (
+                <NavItem className="port-navbar-item">
+                  <Logout />
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Navbar>
