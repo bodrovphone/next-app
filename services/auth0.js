@@ -14,6 +14,20 @@ class Auth0 {
   Login = () => {
     this.auth0.authorize();
   };
+
+  HandleAuthentication = () => {
+    this.auth0.parseHash((err, authResult) => {
+      if (authResult && authResult.successToken && authResult.idToken) {
+        this.setSession(authResult);
+      } else if (err) {
+        console.log(err);
+      }
+    });
+  };
+
+  setSession = () => {
+    // Save Tokens
+  };
 }
 
 const auth0Client = new Auth0();
