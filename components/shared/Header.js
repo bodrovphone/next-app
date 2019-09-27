@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Link from 'next/link';
+import auth0Client from '../../services/auth0';
 
 import {
   Collapse,
@@ -20,7 +21,12 @@ const BsNavLink = ({ href, title }) => (
 );
 
 const Login = () => (
-  <span className="nav-link port-navbar-link clickable"> Login </span>
+  <span
+    onClick={auth0Client.Login}
+    className="nav-link port-navbar-link clickable"
+  >
+    Login
+  </span>
 );
 const Logout = () => (
   <span className="nav-link port-navbar-link clickable"> Logout </span>
