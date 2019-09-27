@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Link from 'next/link';
 import auth0Client from '../../services/auth0';
-
 import {
   Collapse,
   Navbar,
@@ -29,7 +28,13 @@ const Login = () => (
   </span>
 );
 const Logout = () => (
-  <span className="nav-link port-navbar-link clickable"> Logout </span>
+  <span
+    className="nav-link port-navbar-link clickable"
+    onClick={() => logout()}
+  >
+    {' '}
+    Logout{' '}
+  </span>
 );
 
 export default class Header extends React.Component {
@@ -63,12 +68,15 @@ export default class Header extends React.Component {
               <BsNavLink href="/about" title="About" />
               <BsNavLink href="/portfolios" title="Portfolio" />
               <BsNavLink href="/cv" title="Blog" />
-              <NavItem className="port-navbar-item">
-                <Login />
-              </NavItem>
-              <NavItem className="port-navbar-item">
-                <Logout />
-              </NavItem>
+              {!isAuthenticated ? (
+                <NavItem className="port-navbar-item">
+                  <Login />
+                </NavItem>
+              ) : (
+                <NavItem className="port-navbar-item">
+                  <Logout />
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Navbar>
