@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
+import auth0Client from '../services/auth0';
+import { withRouter } from 'next/router';
 
-export default class Callback extends Component {
+class Callback extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    console.log('start');
+    auth0Client
+      .HandleAuthentication()
+      .then(res => console.log(res))
+      .catch(err => {
+        console.log(err);
+      });
+    console.log('end');
+    this.props.router.push('/');
+  }
+
   render() {
     return (
       <BaseLayout>
@@ -10,3 +28,5 @@ export default class Callback extends Component {
     );
   }
 }
+
+export default withRouter(Callback);
