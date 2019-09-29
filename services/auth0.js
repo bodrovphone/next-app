@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js';
+import Cookie from 'js-cookie';
 
 class Auth0 {
   constructor() {
@@ -16,6 +17,7 @@ class Auth0 {
   };
 
   HandleAuthentication = () => {
+    debugger;
     return new Promise((resolve, reject) => {
       this.auth0.parseHash((err, authResult) => {
         if (authResult && authResult.successToken && authResult.idToken) {
@@ -29,8 +31,30 @@ class Auth0 {
     });
   };
 
-  setSession = () => {
-    // Save Tokens
+  setSession = authResult => {
+    const expiresAt = JSON.stringify(
+      authResult.expiresIn * 1000 + new Date().getTime()
+    );
+
+    Cookie.set('user', authResult.idTokenPayload);
+    Cookie.set('jwt', authResult.idToken);
+    Cookie.set('expiresAt', authResult.expiresAt);
+  };
+
+  logout = () => {
+    Cookie.remove('user');
+    Cookie.remove('jwt');
+    Cookie.remove('expiresAt');
+
+    this.auth0.logout({
+      returnTo: '',
+      clientID: 'Yp4oRNsPjRxBSVyZRzTm8B6sefH382Zx'
+    });
+  };
+
+  isAuthenticated = () => {
+    const expiresAt = Cookie.getJSON('expiresAt');
+    return new Date().getTime() < expiresAt;
   };
 }
 
