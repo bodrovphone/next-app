@@ -17,10 +17,9 @@ class Auth0 {
   };
 
   HandleAuthentication = () => {
-    debugger;
     return new Promise((resolve, reject) => {
       this.auth0.parseHash((err, authResult) => {
-        if (authResult && authResult.successToken && authResult.idToken) {
+        if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
           resolve();
         } else if (err) {
@@ -38,7 +37,7 @@ class Auth0 {
 
     Cookie.set('user', authResult.idTokenPayload);
     Cookie.set('jwt', authResult.idToken);
-    Cookie.set('expiresAt', authResult.expiresAt);
+    Cookie.set('expiresAt', expiresAt);
   };
 
   logout = () => {

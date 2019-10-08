@@ -9,14 +9,12 @@ class Callback extends Component {
   }
 
   componentDidMount() {
-    console.log('start');
     auth0Client
       .HandleAuthentication()
       .then(res => console.log(res))
       .catch(err => {
         console.log(err);
       });
-    console.log('end');
     this.props.router.push('/');
   }
 
