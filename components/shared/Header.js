@@ -49,6 +49,7 @@ export default class Header extends React.Component {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }));
   }
   render() {
+    const { isAuthenticated } = this.props;
     return (
       <div>
         <Navbar
@@ -67,7 +68,7 @@ export default class Header extends React.Component {
               <BsNavLink href="/about" title="About" />
               <BsNavLink href="/portfolios" title="Portfolio" />
               <BsNavLink href="/cv" title="Blog" />
-              {!auth0Client.isAuthenticated() ? (
+              {!isAuthenticated ? (
                 <NavItem className="port-navbar-item">
                   <Login />
                 </NavItem>

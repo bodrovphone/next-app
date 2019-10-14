@@ -4,10 +4,11 @@ import { Container } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 const BaseLayout = props => {
-  const { children, className } = props;
+  const { children, className, isAuthenticated } = props;
+  console.log('from base layout', isAuthenticated);
   return (
     <div className="layout-container">
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       <main className={`cover ${className}`}>
         <div className="wrapper">
           <Container className={`base-page ${className}`}>{children}</Container>

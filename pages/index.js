@@ -16,7 +16,7 @@ export default class index extends Component {
   }
   render() {
     return (
-      <BaseLayout className="cover">
+      <BaseLayout className="cover" {...this.props}>
         <div className="main-section">
           <div className="background-image">
             <img src="/static/images/background-index.png" />

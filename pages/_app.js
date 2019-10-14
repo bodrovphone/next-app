@@ -16,16 +16,16 @@ class MyApp extends App {
       ? auth0Client.clientAuth()
       : auth0Client.serverAuth(ctx.req);
 
-    console.log(isAuthenticated);
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-    return { pageProps };
+
+    return { pageProps, isAuthenticated };
   }
 
   render() {
-    const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
+    const { Component, pageProps, isAuthenticated } = this.props;
+    return <Component {...pageProps} isAuthenticated={isAuthenticated} />;
   }
 }
 

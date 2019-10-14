@@ -9,7 +9,7 @@ class Porfolio extends Component {
 
   render() {
     return (
-      <BaseLayout>
+      <BaseLayout {...this.props}>
         <h1>Hello I am a Portfolio-single Page!</h1>
         <h2>{this.props.router.query.id}</h2>
       </BaseLayout>
