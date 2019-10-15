@@ -1,11 +1,11 @@
-import React from 'react';
-import App, { Container } from 'next/app';
+import React from "react";
+import App, { Container } from "next/app";
 
-import auth0Client from '../services/auth0';
+import Auth0Client from "../services/auth0";
 
 // Stylings
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/main.scss';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/main.scss";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -13,8 +13,8 @@ class MyApp extends App {
     // calls page's `getInitialProps` and fills `appProps.pageProps`
 
     const isAuthenticated = process.browser
-      ? auth0Client.clientAuth()
-      : auth0Client.serverAuth(ctx.req);
+      ? Auth0Client.clientAuth()
+      : Auth0Client.serverAuth(ctx.req);
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);

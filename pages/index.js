@@ -1,22 +1,27 @@
-import React, { Component } from 'react';
-import BaseLayout from '../components/layouts/BaseLayout';
-import { Container, Row, Col } from 'reactstrap';
-import Typed from 'react-typed';
+import React, { Component } from "react";
+import BaseLayout from "../components/layouts/BaseLayout";
+import { Container, Row, Col } from "reactstrap";
+import Typed from "react-typed";
+import { throws } from "assert";
 
 export default class index extends Component {
   constructor(props) {
     super(props);
 
     this.roles = [
-      'Developer',
-      'Tech Lover',
-      'Team Player',
-      'ReactJS, HTML, JS'
+      "Developer",
+      "Tech Lover",
+      "Team Player",
+      "ReactJS, HTML, JS"
     ];
   }
   render() {
     return (
-      <BaseLayout className="cover" {...this.props}>
+      <BaseLayout
+        className="cover"
+        {...this.props}
+        isAuthenticated={this.props.isAuthenticated}
+      >
         <div className="main-section">
           <div className="background-image">
             <img src="/static/images/background-index.png" />

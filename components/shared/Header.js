@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import Link from 'next/link';
-import auth0Client from '../../services/auth0';
+import React, { Component, Fragment } from "react";
+import Link from "next/link";
+import Auth0Client from "../../services/auth0";
 import {
   Collapse,
   Navbar,
@@ -9,7 +9,7 @@ import {
   Nav,
   NavItem,
   NavLink
-} from 'reactstrap';
+} from "reactstrap";
 
 const BsNavLink = ({ href, title }) => (
   <NavItem className="port-navbar-item">
@@ -21,7 +21,7 @@ const BsNavLink = ({ href, title }) => (
 
 const Login = () => (
   <span
-    onClick={auth0Client.Login}
+    onClick={Auth0Client.Login}
     className="nav-link port-navbar-link clickable"
   >
     Login
@@ -30,7 +30,7 @@ const Login = () => (
 const Logout = () => (
   <span
     className="nav-link port-navbar-link clickable"
-    onClick={auth0Client.logout}
+    onClick={Auth0Client.logout}
   >
     Logout
   </span>
