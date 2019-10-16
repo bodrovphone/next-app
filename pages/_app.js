@@ -12,7 +12,7 @@ class MyApp extends App {
     let pageProps = {};
     // calls page's `getInitialProps` and fills `appProps.pageProps`
 
-    const isAuthenticated = process.browser
+    const user = process.browser
       ? Auth0Client.clientAuth()
       : Auth0Client.serverAuth(ctx.req);
 
@@ -20,7 +20,7 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps, isAuthenticated };
+    return { pageProps, isAuthenticated: !!user };
   }
 
   render() {

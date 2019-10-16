@@ -1,11 +1,10 @@
-import React from 'react';
-import Header from '../shared/Header';
-import { Container } from 'reactstrap';
-import PropTypes from 'prop-types';
+import React from "react";
+import Header from "../shared/Header";
+import { Container } from "reactstrap";
+import PropTypes from "prop-types";
 
 const BaseLayout = props => {
   const { children, className, isAuthenticated } = props;
-  console.log('from base layout', isAuthenticated);
   return (
     <div className="layout-container">
       <Header isAuthenticated={isAuthenticated} />
@@ -19,7 +18,7 @@ const BaseLayout = props => {
 };
 
 BaseLayout.defaultProps = {
-  className: 'test'
+  className: "test"
 };
 
 BaseLayout.propTypes = {
