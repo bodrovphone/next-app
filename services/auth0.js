@@ -1,15 +1,15 @@
-import auth0 from "auth0-js";
-import Cookie from "js-cookie";
-import jwt from "jsonwebtoken";
+import auth0 from 'auth0-js';
+import Cookie from 'js-cookie';
+import jwt from 'jsonwebtoken';
 
 class auth0Client {
   constructor() {
     this.auth0 = new auth0.WebAuth({
-      domain: "dev-4vh4q7if.eu.auth0.com",
-      clientID: "Yp4oRNsPjRxBSVyZRzTm8B6sefH382Zx",
-      redirectUri: "http://localhost:3000/callback",
-      responseType: "token id_token",
-      scope: "openid profile"
+      domain: 'dev-4vh4q7if.eu.auth0.com',
+      clientID: 'Yp4oRNsPjRxBSVyZRzTm8B6sefH382Zx',
+      redirectUri: 'http://localhost:3000/callback',
+      responseType: 'token id_token',
+      scope: 'openid profile'
     });
   }
 
@@ -36,24 +36,24 @@ class auth0Client {
       authResult.expiresIn * 1000 + new Date().getTime()
     );
 
-    Cookie.set("user", authResult.idTokenPayload);
-    Cookie.set("jwt", authResult.idToken);
-    Cookie.set("expiresAt", expiresAt);
+    Cookie.set('user', authResult.idTokenPayload);
+    Cookie.set('jwt', authResult.idToken);
+    Cookie.set('expiresAt', expiresAt);
   };
 
   logout = () => {
-    Cookie.remove("user");
-    Cookie.remove("jwt");
-    Cookie.remove("expiresAt");
+    Cookie.remove('user');
+    Cookie.remove('jwt');
+    Cookie.remove('expiresAt');
 
     this.auth0.logout({
-      returnTo: "",
-      clientID: "Yp4oRNsPjRxBSVyZRzTm8B6sefH382Zx"
+      returnTo: '',
+      clientID: 'Yp4oRNsPjRxBSVyZRzTm8B6sefH382Zx'
     });
   };
 
   isAuthenticated = () => {
-    const expiresAt = Cookie.getJSON("expiresAt");
+    const expiresAt = Cookie.getJSON('expiresAt');
     return new Date().getTime() < expiresAt;
   };
 
@@ -70,7 +70,7 @@ class auth0Client {
       : undefined;
   };
   clientAuth = () => {
-    const token = Cookie.getJSON("jwt");
+    const token = Cookie.getJSON('jwt');
     const verifiedToken = this.verifyToken(token);
 
     return verifiedToken;
@@ -78,15 +78,14 @@ class auth0Client {
 
   serverAuth = req => {
     let tokenCookie;
-    let expiresAtCookie;
     if (req.headers && req.headers.cookie) {
-      expiresAtCookie = req.headers.cookie
-        .split(";")
-        .find(c => c.trim().startsWith("jwt="));
+      tokenCookie = req.headers.cookie
+        .split(';')
+        .find(c => c.trim().startsWith('jwt='));
       if (!tokenCookie) {
         return undefined;
       }
-      const token = expiresAtCookie.split("=")[1];
+      const token = tokenCookie.split('=')[1];
       const verifiedToken = this.verifyToken(token);
 
       return verifiedToken;

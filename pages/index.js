@@ -1,26 +1,28 @@
-import React, { Component } from "react";
-import BaseLayout from "../components/layouts/BaseLayout";
-import { Container, Row, Col } from "reactstrap";
-import Typed from "react-typed";
-import { throws } from "assert";
+import React, { Component } from 'react';
+import BaseLayout from '../components/layouts/BaseLayout';
+import { Container, Row, Col } from 'reactstrap';
+import Typed from 'react-typed';
+import { throws } from 'assert';
 
 export default class index extends Component {
   constructor(props) {
     super(props);
 
     this.roles = [
-      "Developer",
-      "Tech Lover",
-      "Team Player",
-      "ReactJS, HTML, JS"
+      'Developer',
+      'Tech Lover',
+      'Team Player',
+      'ReactJS, HTML, JS'
     ];
   }
   render() {
+    const { isAuthenticated, user } = this.props.auth;
     return (
       <BaseLayout
         className="cover"
         {...this.props}
-        isAuthenticated={this.props.isAuthenticated}
+        isAuthenticated={isAuthenticated}
+        user={user}
       >
         <div className="main-section">
           <div className="background-image">
@@ -53,6 +55,7 @@ export default class index extends Component {
               <Col md="6" className="hero-welcome-wrapper">
                 <div className="hero-welcome-text">
                   <h1>
+                    {isAuthenticated && <strong> {user.nickname} </strong>}
                     Welcome to the portfolio website of Filip Jerga. Get
                     informed, collaborate and discover projects I was working on
                     through the years!

@@ -1,11 +1,11 @@
-import React from "react";
-import App, { Container } from "next/app";
+import React from 'react';
+import App, { Container } from 'next/app';
 
-import Auth0Client from "../services/auth0";
+import Auth0Client from '../services/auth0';
 
 // Stylings
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/main.scss";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/main.scss';
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -20,12 +20,14 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps, isAuthenticated: !!user };
+    const auth = { user, isAuthenticated: !!user };
+
+    return { pageProps, auth };
   }
 
   render() {
-    const { Component, pageProps, isAuthenticated } = this.props;
-    return <Component {...pageProps} isAuthenticated={isAuthenticated} />;
+    const { Component, pageProps, auth } = this.props;
+    return <Component {...pageProps} auth={auth} />;
   }
 }
 
