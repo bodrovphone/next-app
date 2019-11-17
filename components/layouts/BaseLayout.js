@@ -1,14 +1,14 @@
-import React from 'react';
-import Header from '../shared/Header';
-import { Container } from 'reactstrap';
-import PropTypes from 'prop-types';
+import React from "react";
+import Header from "../shared/Header";
+import { Container } from "reactstrap";
+import PropTypes from "prop-types";
 
 const BaseLayout = props => {
-  const { children, className, user, isAuthenticated } = props;
-  console.log(props);
+  const { children, className, auth } = props;
+  console.log(auth);
   return (
     <div className="layout-container">
-      <Header {...props} />
+      <Header auth={auth} />
       <main className={`cover ${className}`}>
         <div className="wrapper">
           <Container className={`base-page ${className}`}>{children}</Container>
@@ -19,7 +19,7 @@ const BaseLayout = props => {
 };
 
 BaseLayout.defaultProps = {
-  className: 'test'
+  className: "test"
 };
 
 BaseLayout.propTypes = {

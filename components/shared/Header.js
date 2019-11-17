@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import Link from 'next/link';
-import Auth0Client from '../../services/auth0';
+import React, { Component, Fragment } from "react";
+import Link from "next/link";
+import Auth0Client from "../../services/auth0";
 import {
   Collapse,
   Navbar,
@@ -9,7 +9,7 @@ import {
   Nav,
   NavItem,
   NavLink
-} from 'reactstrap';
+} from "reactstrap";
 
 const BsNavLink = ({ href, title }) => (
   <NavItem className="port-navbar-item">
@@ -49,7 +49,7 @@ export default class Header extends React.Component {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }));
   }
   render() {
-    const { isAuthenticated, user } = this.props;
+    const { isAuthenticated, user } = this.props.auth;
     return (
       <div>
         <Navbar
