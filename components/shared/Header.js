@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import Link from "next/link";
 import Auth0Client from "../../services/auth0";
+
+import "../../styles/main.scss";
+
 import {
   Collapse,
   Navbar,
@@ -49,7 +52,7 @@ export default class Header extends React.Component {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }));
   }
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    // const { isAuthenticated, user } = this.props.auth;
     return (
       <div>
         <Navbar
@@ -68,7 +71,7 @@ export default class Header extends React.Component {
               <BsNavLink href="/about" title="About" />
               <BsNavLink href="/portfolios" title="Portfolio" />
               <BsNavLink href="/cv" title="Blog" />
-              {!isAuthenticated ? (
+              {/* {!isAuthenticated ? (
                 <NavItem className="port-navbar-item">
                   <Login />
                 </NavItem>
@@ -81,7 +84,7 @@ export default class Header extends React.Component {
                 <NavItem className="port-navbar-item">
                   <span>{user.nickname}</span>
                 </NavItem>
-              )}
+              )} */}
             </Nav>
           </Collapse>
         </Navbar>

@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 const BaseLayout = props => {
   const { children, className, auth } = props;
-  console.log(auth);
   return (
     <div className="layout-container">
       <Header auth={auth} />
@@ -18,12 +17,8 @@ const BaseLayout = props => {
   );
 };
 
-BaseLayout.defaultProps = {
-  className: "test"
-};
-
-BaseLayout.propTypes = {
-  className: PropTypes.any.isRequired
-};
+// BaseLayout.propTypes = {
+//   className: PropTypes.any.isRequired
+// };
 
 export default BaseLayout;
