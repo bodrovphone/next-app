@@ -29,7 +29,6 @@ export default class Index extends Component {
   }
   render() {
     const { initialData } = this.props;
-    console.log(initialData);
     return (
       <BaseLayout>
         <h1>Welcome Page!</h1>

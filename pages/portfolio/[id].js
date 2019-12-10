@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import BaseLayout from "../components/layouts/BaseLayout";
+import BaseLayout from "../../components/layouts/BaseLayout";
 import { withRouter } from "next/router";
 
 class Portfolio extends Component {
@@ -8,7 +8,7 @@ class Portfolio extends Component {
     return (
       <BaseLayout>
         <h1>I am Portfolios Page</h1>
-        <h2>{this.props.router.query.title}</h2>
+        <h2>{this.props.router.query.id}</h2>
       </BaseLayout>
     );
   }

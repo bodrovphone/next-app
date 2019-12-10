@@ -19,7 +19,7 @@ export default class Portfolios extends Component {
   renderPosts = posts => {
     return posts.map(post => (
       <li key={post.id + Math.random()}>
-        <Link href={`/portfolio?title=${post.title}`}>
+        <Link as={`/portfolio/${post.id}`} href="/portfolio/[id]">
           <a style={{ fontSize: "20px" }}>{post.title}</a>
         </Link>
       </li>
