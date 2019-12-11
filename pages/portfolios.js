@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import BaseLayout from "../components/layouts/BaseLayout";
-import Link from "next/link";
+import { Link } from "../routes";
 
 export default class Portfolios extends Component {
   static async getInitialProps() {
@@ -19,7 +19,7 @@ export default class Portfolios extends Component {
   renderPosts = posts => {
     return posts.map(post => (
       <li key={post.id + Math.random()}>
-        <Link as={`/portfolio/${post.id}`} href="/portfolio/[id]">
+        <Link route={`portfolios/portfolio/${post.id}`}>
           <a style={{ fontSize: "20px" }}>{post.title}</a>
         </Link>
       </li>

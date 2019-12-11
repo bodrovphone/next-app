@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import BaseLayout from "../../components/layouts/BaseLayout";
+import BaseLayout from "../components/layouts/BaseLayout";
 import { withRouter } from "next/router";
 
 class Portfolio extends Component {
   static async getInitialProps(context) {
     let post;
+    const { id } = context.query;
     try {
       post = await axios
-        .get(`https://jsonplaceholder.typicode.com/posts/${context.query.id}`)
+        .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
         .then(response => response.data);
     } catch (err) {
       err => console.log(err);

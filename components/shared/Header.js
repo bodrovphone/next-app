@@ -69,7 +69,7 @@ export default class Header extends React.Component {
             <Nav className="ml-auto" navbar>
               <BsNavLink href="/" title="Home" />
               <BsNavLink href="/about" title="About" />
-              <BsNavLink href="/portfolios" title="Portfolio" />
+              <BsNavLink href="/portfolios" title="Portfolios" />
               <BsNavLink href="/cv" title="Blog" />
               {/* {!isAuthenticated ? (
                 <NavItem className="port-navbar-item">
