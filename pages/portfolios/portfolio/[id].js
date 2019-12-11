@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import BaseLayout from "../../components/layouts/BaseLayout";
+import BaseLayout from "../../../components/layouts/BaseLayout";
 import { withRouter } from "next/router";
 
 class Portfolio extends Component {
