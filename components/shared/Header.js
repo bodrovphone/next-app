@@ -2,8 +2,6 @@ import React, { Component, Fragment } from "react";
 import Link from "next/link";
 import Auth0Client from "../../services/auth0";
 
-import "../../styles/main.scss";
-
 import {
   Collapse,
   Navbar,

@@ -1,14 +1,14 @@
-@import './shared/fonts';
+@import "./shared/fonts";
 // Pages
-@import './shared/index';
+@import "./shared/index";
 // Header
-@import './shared/header';
+@import "./shared/header";
 
 html,
 body {
   height: 100%;
   width: 100%;
-  font-family: 'PoorStory', 'Arial';
+  font-family: "PoorStory", "Arial" !important;
 }
 
 .self-typed {
