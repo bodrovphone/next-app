@@ -68,7 +68,8 @@ export default class Header extends React.Component {
               <BsNavLink href="/" title="Home" />
               <BsNavLink href="/about" title="About" />
               <BsNavLink href="/portfolios" title="Portfolios" />
-              <BsNavLink href="/cv" title="Blog" />
+              <BsNavLink href="/blogs" title="Blog" />
+              <BsNavLink href="/cv" title="CV" />
               {/* {!isAuthenticated ? (
                 <NavItem className="port-navbar-item">
                   <Login />
