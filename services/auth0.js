@@ -18,6 +18,7 @@ class auth0Client {
   };
 
   handleAuthentication = () => {
+    debugger;
     return new Promise((resolve, reject) => {
       this.auth0.parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
@@ -54,7 +55,10 @@ class auth0Client {
 
   isAuthenticated = () => {
     const expiresAt = Cookie.getJSON("expiresAt");
-    console.log("client side: ", new Date().getTime() < expiresAt);
+    console.log(
+      "client side expired(expiresAt)? - ",
+      new Date().getTime() < expiresAt
+    );
     return new Date().getTime() < expiresAt;
   };
 
@@ -70,6 +74,7 @@ class auth0Client {
       ? decodedToken
       : undefined;
   };
+
   clientAuth = () => {
     // const token = Cookie.getJSON("jwt");
     // const verifiedToken = this.verifyToken(token);

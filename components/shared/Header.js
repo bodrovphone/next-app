@@ -28,6 +28,7 @@ const Login = () => (
     Login
   </span>
 );
+
 const Logout = () => (
   <span
     className="nav-link port-navbar-link clickable"
@@ -37,7 +38,7 @@ const Logout = () => (
   </span>
 );
 
-export default class Header extends React.Component {
+export default class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -84,6 +85,10 @@ export default class Header extends React.Component {
                   <span>{user.nickname}</span>
                 </NavItem>
               )} */}
+
+              <NavItem className="port-navbar-item">
+                <Login />
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>

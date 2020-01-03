@@ -26,12 +26,12 @@
       text-transform: uppercase;
 
       &.active {
-        color: #dba919;
+        color: #dba919 !important;
       }
 
       &:hover,
       &:focus {
-        color: #dba919;
+        color: #dba919 !important;
       }
     }
   }
