@@ -88,17 +88,14 @@ class auth0Client {
     if (req.headers && req.headers.cookie) {
       expiresAtCookie = req.headers.cookie
         .split(";")
-        .find(c => c.trim().startsWith("jwt="));
+        .find(c => c.trim().startsWith("expiresAt="));
 
-      if (!expiresAtCookie) {
-        return undefined;
-      }
-
-      const expiresAt = expiresAtCookie.split("=")[1];
+      const expiresAt = expiresAtCookie && expiresAtCookie.split("=")[1];
 
       console.log("serverAuth: ", new Date().getTime() < expiresAt);
       return new Date().getTime() < expiresAt;
     }
+    return undefined;
   };
 }
 

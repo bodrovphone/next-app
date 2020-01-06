@@ -1,19 +1,28 @@
 import React from "react";
 import App from "next/app";
+import Auth0Client from "../services/auth0";
 
 import "../styles/main.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class MyApp extends App {
-  static async getInitialProps(appContext) {
-    const appProps = await App.getInitialProps(appContext);
+  static async getInitialProps({ Component, router, ctx }) {
+    let pageProps = {};
+    const isAuthenticated = await (process.browser
+      ? Auth0Client.clientAuth()
+      : Auth0Client.serverAuth(ctx.req));
 
-    return { ...appProps };
+    console.log("isAuthenticated: ", isAuthenticated);
+
+    if (Component.getInitialProps) pageProps = await App.getInitialProps(ctx);
+
+    const auth = { isAuthenticated };
+    return { pageProps, auth };
   }
 
   render() {
-    const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
+    const { Component } = this.props;
+    return <Component auth={this.props.auth} />;
   }
 }
 

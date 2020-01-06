@@ -20,7 +20,7 @@ class Portfolio extends Component {
   render() {
     const { post } = this.props;
     return (
-      <BaseLayout>
+      <BaseLayout {...this.props.auth}>
         <BasePage>
           <h1>I am [id].js page with the id of {post.id}</h1>
           <h2>{post.title}</h2>
