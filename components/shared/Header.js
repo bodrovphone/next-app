@@ -71,7 +71,7 @@ export default class Header extends Component {
               <BsNavLink href="/portfolios" title="Portfolios" />
               <BsNavLink href="/blogs" title="Blog" />
               <BsNavLink href="/cv" title="CV" />
-              {/* {!isAuthenticated ? (
+              {!Auth0Client.isAuthenticated() ? (
                 <NavItem className="port-navbar-item">
                   <Login />
                 </NavItem>
@@ -80,15 +80,6 @@ export default class Header extends Component {
                   <Logout />
                 </NavItem>
               )}
-              {isAuthenticated && (
-                <NavItem className="port-navbar-item">
-                  <span>{user.nickname}</span>
-                </NavItem>
-              )} */}
-
-              <NavItem className="port-navbar-item">
-                <Login />
-              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>

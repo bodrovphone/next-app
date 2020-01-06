@@ -18,7 +18,6 @@ class auth0Client {
   };
 
   handleAuthentication = () => {
-    debugger;
     return new Promise((resolve, reject) => {
       this.auth0.parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
