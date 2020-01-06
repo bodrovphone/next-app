@@ -14,7 +14,8 @@ class MyApp extends App {
 
     console.log("isAuthenticated: ", isAuthenticated);
 
-    if (Component.getInitialProps) pageProps = await App.getInitialProps(ctx);
+    if (Component.getInitialProps)
+      pageProps = await Component.getInitialProps(ctx);
 
     const auth = { isAuthenticated };
     return { pageProps, auth };
