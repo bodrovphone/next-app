@@ -52,15 +52,6 @@ class auth0Client {
     });
   };
 
-  isAuthenticated = () => {
-    const expiresAt = Cookie.getJSON("expiresAt");
-    console.log(
-      "client side expired(expiresAt)? - ",
-      new Date().getTime() < expiresAt
-    );
-    return new Date().getTime() < expiresAt;
-  };
-
   verifyToken = token => {
     let decodedToken;
     let expiresAt;
@@ -75,27 +66,25 @@ class auth0Client {
   };
 
   clientAuth = () => {
-    // const token = Cookie.getJSON("jwt");
-    // const verifiedToken = this.verifyToken(token);
+    const token = Cookie.getJSON("jwt");
+    const verifiedToken = this.verifyToken(token);
 
-    // return verifiedToken;
-    console.log("clientAuth: ", this.isAuthenticated());
-    return this.isAuthenticated();
+    return verifiedToken;
   };
 
   serverAuth = req => {
-    let expiresAtCookie;
+    let tokenCookie;
+    let verifiedToken;
     if (req.headers && req.headers.cookie) {
-      expiresAtCookie = req.headers.cookie
+      tokenCookie = req.headers.cookie
         .split(";")
-        .find(c => c.trim().startsWith("expiresAt="));
+        .find(c => c.trim().startsWith("jwt="));
 
-      const expiresAt = expiresAtCookie && expiresAtCookie.split("=")[1];
+      const token = tokenCookie && tokenCookie.split("=")[1];
 
-      console.log("serverAuth: ", new Date().getTime() < expiresAt);
-      return new Date().getTime() < expiresAt;
+      verifiedToken = this.verifyToken(token);
     }
-    return undefined;
+    return verifiedToken;
   };
 }
 

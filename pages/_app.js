@@ -8,16 +8,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
-    const isAuthenticated = await (process.browser
+    const user = await (process.browser
       ? Auth0Client.clientAuth()
       : Auth0Client.serverAuth(ctx.req));
-
-    console.log("isAuthenticated: ", isAuthenticated);
 
     if (Component.getInitialProps)
       pageProps = await Component.getInitialProps(ctx);
 
-    const auth = { isAuthenticated };
+    const auth = { user, isAuthenticated: !!user };
     return { pageProps, auth };
   }
 

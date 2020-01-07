@@ -18,34 +18,34 @@ export default class Index extends Component {
     ];
   }
 
-  static async getInitialProps() {
-    /* KEEP IT FOR TESTING IF YOU GET INTO TROUBLES LATER
-     * basically this block explains everything,
-     * almost everything about getInitial props and how it behaves
-     * it literally stops the page from returning from server until
-     *
-      console.log("I am getInitialProps");
-        let initialData = [];
-        await new Promise(resolve => setTimeout(resolve, 2000)).then(
-          (initialData = [1, 2, 3, 4, 5])
-        );
-      return { initialData };
-     */
+  // static async getInitialProps() {
+  //   /* KEEP IT FOR TESTING IF YOU GET INTO TROUBLES LATER
+  //    * basically this block explains everything,
+  //    * almost everything about getInitial props and how it behaves
+  //    * it literally stops the page from returning from server until
+  //    *
+  //     console.log("I am getInitialProps");
+  //       let initialData = [];
+  //       await new Promise(resolve => setTimeout(resolve, 2000)).then(
+  //         (initialData = [1, 2, 3, 4, 5])
+  //       );
+  //     return { initialData };
+  //    */
 
-    //  ==== **** === ****
-    let initialData;
-    try {
-      initialData = await axios
-        .get("https://jsonplaceholder.typicode.com/todos/1")
-        .then(response => response.data);
-    } catch (err) {
-      err => console.log(err);
-    }
-    return { initialData: initialData };
-  }
+  //   //  ==== **** === ****
+  //   let initialData;
+  //   try {
+  //     initialData = await axios
+  //       .get("https://jsonplaceholder.typicode.com/todos/1")
+  //       .then(response => response.data);
+  //   } catch (err) {
+  //     err => console.log(err);
+  //   }
+  //   return { initialData: initialData };
+  // }
 
   render() {
-    const { initialData } = this.props;
+    const { isAuthenticated, user } = this.props.auth;
     return (
       <BaseLayout className="cover" {...this.props.auth}>
         <div className="main-section">
@@ -79,6 +79,7 @@ export default class Index extends Component {
               <Col md="6" className="hero-welcome-wrapper">
                 <div className="hero-welcome-text">
                   <h1>
+                    {isAuthenticated && <span> {user.nickname} </span>}
                     Welcome to the portfolio website of Filip Jerga. Get
                     informed, collaborate and discover projects I was working on
                     through the years!
