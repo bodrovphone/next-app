@@ -51,7 +51,7 @@ export default class Header extends Component {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }));
   }
   render() {
-    // const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props;
     return (
       <div>
         <Navbar
@@ -71,7 +71,7 @@ export default class Header extends Component {
               <BsNavLink href="/portfolios" title="Portfolios" />
               <BsNavLink href="/blogs" title="Blog" />
               <BsNavLink href="/cv" title="CV" />
-              {!Auth0Client.isAuthenticated() ? (
+              {!isAuthenticated ? (
                 <NavItem className="port-navbar-item">
                   <Login />
                 </NavItem>

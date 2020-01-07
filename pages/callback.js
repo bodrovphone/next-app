@@ -6,12 +6,13 @@ import { withRouter } from "next/router";
 
 class Callback extends Component {
   async componentDidMount() {
+    debugger;
     await Auth0Client.handleAuthentication();
     this.props.router.push("/");
   }
   render() {
     return (
-      <BaseLayout>
+      <BaseLayout {...this.props.auth}>
         <BasePage>
           <h1>Checking your login data...</h1>
         </BasePage>
