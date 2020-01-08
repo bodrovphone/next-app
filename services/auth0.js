@@ -1,6 +1,7 @@
 import auth0 from "auth0-js";
 import Cookie from "js-cookie";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 
 class auth0Client {
   constructor() {
@@ -52,27 +53,49 @@ class auth0Client {
     });
   };
 
-  verifyToken = token => {
-    let decodedToken;
-    let expiresAt;
+  // verifying JWT token with certificate (signature)
+  // read more on this here: https://auth0.com/blog/navigating-rs256-and-jwks/
+  verifyToken = async token => {
     if (token) {
-      decodedToken = jwt.decode(token);
-      expiresAt = decodedToken.exp * 1000;
-    }
+      // decoding the token. complete true means that I also want headers in decoded form
+      const decodedToken = jwt.decode(token, { complete: true });
+      if (!decodedToken) return undefined;
+      // requesting jeys set
+      const jwks = await this.getJWKS();
+      // the key is always at position 0
+      const jwk = jwks.keys[0];
+      // build certificate
+      let cert = jwk.x5c[0];
+      cert = cert.match(/.{1,64}/g).join("\n");
+      cert = `-----BEGIN CERTIFICATE-----\n${cert}\n-----END CERTIFICATE-----\n`;
 
-    return decodedToken && new Date().getTime() < expiresAt
-      ? decodedToken
-      : undefined;
+      // comparing server jwt with our cookie token? they must match
+      if (jwk.kid === decodedToken.header.kid) {
+        try {
+          // performing a mission of this method, finally
+          const verifiedToken = jwt.verify(token, cert);
+          const expiresAt = verifiedToken.exp * 1000;
+          // checking if jwt expires or not, phew...
+          return verifiedToken && new Date().getTime() < expiresAt
+            ? verifiedToken
+            : undefined;
+        } catch (er) {
+          console.log("verifyToken error: ", er);
+          return undefined;
+        }
+      }
+    }
+    return undefined;
   };
 
-  clientAuth = () => {
+  clientAuth = async () => {
     const token = Cookie.getJSON("jwt");
-    const verifiedToken = this.verifyToken(token);
+    const verifiedToken = await this.verifyToken(token);
 
     return verifiedToken;
   };
 
-  serverAuth = req => {
+  serverAuth = async req => {
     let tokenCookie;
     let verifiedToken;
     if (req.headers && req.headers.cookie) {
@@ -82,9 +105,19 @@ class auth0Client {
 
       const token = tokenCookie && tokenCookie.split("=")[1];
 
-      verifiedToken = this.verifyToken(token);
+      verifiedToken = await this.verifyToken(token);
     }
     return verifiedToken;
+  };
+
+  // getting JavaScritp Web Token Keys Set
+  // details: https://auth0.com/blog/navigating-rs256-and-jwks/
+  getJWKS = async () => {
+    const res = await axios.get(
+      "https://dev-4vh4q7if.eu.auth0.com/.well-known/jwks.json"
+    );
+    const jwks = res.data;
+    return jwks;
   };
 }
 
