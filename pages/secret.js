@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BaseLayout from "../components/layouts/BaseLayout";
 import BasePage from "../components/BasePage";
 import withAuth from "../components/hoc/withAuth";
-import axios from "axios";
+import { getSecretData } from "../actions";
 
 class Secret extends Component {
   constructor() {
@@ -11,15 +11,17 @@ class Secret extends Component {
       secretData: []
     };
   }
-  static getInitialProps() {
-    const superSecretValue = "pizdec";
+  static async getInitialProps({ req }) {
+    // the same as process.browser but more secure maybe?
+    // see https://github.com/zeit/next.js/issues/5354#issuecomment-440903920
+    // let inBrowser = typeof window !== "undefined";
 
-    return { superSecretValue };
+    const anotherSecretData = await getSecretData(req);
+    return { anotherSecretData };
   }
 
   async componentDidMount() {
-    const res = await axios.get("/api/v1/secret");
-    const secretData = res.data;
+    const secretData = await getSecretData();
     this.setState({ secretData });
   }
 
@@ -28,22 +30,20 @@ class Secret extends Component {
     if (secretData && secretData.length) {
       return secretData.map((item, index) => {
         return (
-          <>
-            <p key={index + "-title"}>{item.title}</p>
-            <p key={index + "-desc"}>{item.description}</p>
-          </>
+          <React.Fragment key={index + "secret_item"}>
+            <p>{item.title}</p>
+            <p>{item.description}</p>
+          </React.Fragment>
         );
       });
     }
   };
 
   render() {
-    const { superSecretValue } = this.props;
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage>
           <h1>I am Secret Page</h1>
-          <h2>{superSecretValue}</h2>
           {this.displaySecretData()}
         </BasePage>
       </BaseLayout>

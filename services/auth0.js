@@ -2,6 +2,7 @@ import auth0 from "auth0-js";
 import Cookie from "js-cookie";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import { getCookieFromRequest } from "../helpers/utils";
 
 class auth0Client {
   constructor() {
@@ -96,17 +97,8 @@ class auth0Client {
   };
 
   serverAuth = async req => {
-    let tokenCookie;
-    let verifiedToken;
-    if (req.headers && req.headers.cookie) {
-      tokenCookie = req.headers.cookie
-        .split(";")
-        .find(c => c.trim().startsWith("jwt="));
-
-      const token = tokenCookie && tokenCookie.split("=")[1];
-
-      verifiedToken = await this.verifyToken(token);
-    }
+    let token = getCookieFromRequest(req, "jwt");
+    let verifiedToken = await this.verifyToken(token);
     return verifiedToken;
   };
 
