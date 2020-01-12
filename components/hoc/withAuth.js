@@ -4,8 +4,8 @@ import BasePage from "../BasePage";
 
 const nameSpace = "http://localhost:3000/";
 
-const withAuth = (Component, role) => {
-  return class withAuth extends React.Component {
+export default role => Component =>
+  class withAuth extends React.Component {
     static async getInitialProps(args) {
       const pageProps =
         (await Component.getInitialProps) &&
@@ -14,14 +14,27 @@ const withAuth = (Component, role) => {
     }
     renderConditional = () => {
       const { isAuthenticated, user } = this.props.auth;
-      const userRole = user?.[`${nameSpace}role${role}`];
-      if (isAuthenticated) {
+      const userRole = user && user[`${nameSpace}role`];
+      let isAuthorized = false;
+      if (role) {
+        if (userRole && userRole === role) {
+          isAuthorized = true;
+        }
+      } else {
+        isAuthorized = true;
+      }
+
+      if (isAuthenticated && isAuthorized) {
         return <Component {...this.props} />;
       } else {
         return (
           <BaseLayout {...this.props.auth}>
             <BasePage>
-              <div>Oops...not authorizes to see this page</div>
+              <h2>
+                Oops...you're not
+                {!isAuthenticated ? "authenticated" : "authorized"} to see this
+                page
+              </h2>
             </BasePage>
           </BaseLayout>
         );
@@ -31,6 +44,3 @@ const withAuth = (Component, role) => {
       return this.renderConditional();
     }
   };
-};
-
-export default withAuth;
