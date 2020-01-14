@@ -4,6 +4,7 @@ const next = require("next");
 // SERVICES
 
 const authService = require("./services/auth");
+const checkRole = require("./services/auth");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -22,6 +23,16 @@ app
     server.get("/api/v1/secret", authService.checkJWT, (req, res) => {
       return res.json(secretData);
     });
+
+    server.get(
+      "/api/v1/onlysiteowner",
+      authService.checkJWT,
+      authService.checkRole("siteOwner"),
+      (req, res) => {
+        console.log(req.user);
+        return res.json(secretData);
+      }
+    );
 
     server.get("*", (req, res) => {
       return handle(req, res);
