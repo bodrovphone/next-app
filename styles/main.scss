@@ -1,6 +1,9 @@
 @import "./shared/fonts";
+// color
+@import "./shared/colors";
 // Pages
 @import "./shared/index";
+@import "./portfolios";
 // Header
 @import "./shared/header";
 
@@ -22,11 +25,21 @@ body {
   position: absolute !important;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .base-page {
   padding-top: 150px;
   color: white;
-}
-
-.clickable {
-  cursor: pointer;
+  background-color: #ecedce;
+  min-height: 100vh;
+  .page-header {
+    .page-header-title {
+      font-weight: 700;
+      color: black;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  }
 }

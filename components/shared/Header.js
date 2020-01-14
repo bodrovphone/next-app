@@ -51,11 +51,11 @@ export default class Header extends Component {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }));
   }
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, className } = this.props;
     return (
       <div>
         <Navbar
-          className="port-navbar port-default absolute"
+          className={`port-navbar port-nav-base absolute ${className}`}
           color="transparent"
           light
           expand="md"

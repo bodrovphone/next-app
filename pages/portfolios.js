@@ -3,6 +3,15 @@ import axios from "axios";
 import BaseLayout from "../components/layouts/BaseLayout";
 import Link from "next/link";
 import BasePage from "../components/BasePage";
+import {
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardHeader,
+  Row,
+  Col
+} from "reactstrap";
 
 export default class Portfolios extends Component {
   static async getInitialProps() {
@@ -18,15 +27,28 @@ export default class Portfolios extends Component {
   }
 
   renderPosts = posts => {
-    return posts.map(post => (
-      <li key={post.id + Math.random()}>
-        <Link
-          as={`portfolios/portfolio/${post.id}`}
-          href="portfolios/portfolio/[id]"
-        >
-          <a style={{ fontSize: "20px" }}>{post.title}</a>
-        </Link>
-      </li>
+    return posts.map((post, index) => (
+      <Col md="4" key={index}>
+        <React.Fragment key={index}>
+          <span>
+            <Card className="portfolio-card">
+              <CardHeader className="portfolio-card-header">
+                Some Position {index}
+              </CardHeader>
+              <CardBody>
+                <p className="portfolio-card-city"> Some Location {index} </p>
+                <CardTitle className="portfolio-card-title">
+                  Some Company {index}
+                </CardTitle>
+                <CardText className="portfolio-card-text">
+                  Some Description {index}
+                </CardText>
+                <div className="readMore"> </div>
+              </CardBody>
+            </Card>
+          </span>
+        </React.Fragment>
+      </Col>
     ));
   };
 
@@ -34,9 +56,8 @@ export default class Portfolios extends Component {
     const { posts } = this.props;
     return (
       <BaseLayout {...this.props.auth}>
-        <BasePage>
-          <h1>I am Portfolios Page</h1>
-          <ul>{this.renderPosts(posts)}</ul>
+        <BasePage className="portfolio-page" title="Portfolios">
+          <Row>{this.renderPosts(posts)}</Row>
         </BasePage>
       </BaseLayout>
     );
