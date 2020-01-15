@@ -29,11 +29,11 @@ export default role => Component =>
       } else {
         return (
           <BaseLayout {...this.props.auth}>
-            <BasePage>
+            <BasePage className="base-page">
               <h2>
                 Oops...you're not
-                {!isAuthenticated ? "authenticated" : "authorized"} to see this
-                page
+                {!isAuthenticated ? " authenticated" : " authorized"} to see
+                this page
               </h2>
             </BasePage>
           </BaseLayout>
