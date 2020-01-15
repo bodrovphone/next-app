@@ -13,7 +13,7 @@ class PortfolioNew extends Component {
           className="portfolio-create -page"
           title="Create New Portfolio"
         >
-          <PortfolioForm />
+          <PortfolioForm onClick={vars => console.log(...vars)} />
         </BasePage>
       </BaseLayout>
     );

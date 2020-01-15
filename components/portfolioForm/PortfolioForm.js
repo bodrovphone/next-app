@@ -1,70 +1,49 @@
-import { Component } from "react";
+// Render Prop
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
-class PortfolioForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { title: "", description: "", lang: "" };
-  }
-
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSubmit = event => {
-    alert(
-      `Congratulation! You have submittedo
-       a new portfolioOso with these data: 
-
-        ${this.state.title}
-        ${this.state.lang}
-        ${this.state.description}`
-    );
-    event.preventDefault();
-  };
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <br />
-          <input
-            type="text"
-            name="title"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <br />
-          <textarea
-            name="description"
-            value={this.state.description}
-            onChange={this.handleChange}
-          ></textarea>
-        </label>
-        <br />
-        <label>
-          Language:
-          <br />
-          <select
-            value={this.state.lang}
-            name="lang"
-            onChange={this.handleChange}
-          >
-            <option value="JS">JavaScripto</option>
-            <option value="PT">Pythonio</option>
-            <option value="HTML">HTML</option>
-            <option value="RU">Rusish</option>
-          </select>
-        </label>
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
+const PortfolioForm = props => (
+  <div>
+    <button
+      onClick={() =>
+        props.onClick(["string ", "or not ", "or a number ", "who cares"])
+      }
+    >
+      Click Me matha faka
+    </button>
+    <Formik
+      initialValues={{ email: "", password: "" }}
+      validate={values => {
+        const errors = {};
+        if (!values.email) {
+          errors.email = "Required";
+        } else if (
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        ) {
+          errors.email = "Invalid email address";
+        }
+        return errors;
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <Field type="email" name="email" />
+          <ErrorMessage name="email" component="div" />
+          <Field type="password" name="password" />
+          <ErrorMessage name="password" component="div" />
+          <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </Form>
+      )}
+    </Formik>
+  </div>
+);
 
 export default PortfolioForm;
