@@ -1,29 +1,33 @@
 // Render Prop
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Button, FormGroup, Label } from "reactstrap";
+
+const validateInputs = values => {
+  const errors = {};
+  // if (!values.email) {
+  //   errors.email = "Required";
+  // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+  //   errors.email = "Invalid email address";
+  // }
+
+  return errors;
+};
+
+const INITIAL_VALUES = {
+  title: "",
+  company: "",
+  location: "",
+  position: "",
+  startDate: "",
+  endDate: ""
+};
 
 const PortfolioForm = props => (
   <div>
-    <button
-      onClick={() =>
-        props.onClick(["string ", "or not ", "or a number ", "who cares"])
-      }
-    >
-      Click Me matha faka
-    </button>
     <Formik
-      initialValues={{ email: "", password: "" }}
-      validate={values => {
-        const errors = {};
-        if (!values.email) {
-          errors.email = "Required";
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = "Invalid email address";
-        }
-        return errors;
-      }}
+      initialValues={INITIAL_VALUES}
+      validate={validateInputs}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -33,10 +37,84 @@ const PortfolioForm = props => (
     >
       {({ isSubmitting }) => (
         <Form>
-          <Field type="email" name="email" />
-          <ErrorMessage name="email" component="div" />
-          <Field type="password" name="password" />
-          <ErrorMessage name="password" component="div" />
+          <FormGroup>
+            <Label for="title">Title:</Label>
+            <Field
+              id="title"
+              className="form-control"
+              type="text"
+              name="title"
+            />
+            <ErrorMessage name="title" component="div" />
+          </FormGroup>
+
+          <FormGroup>
+            <Label for="company">Company:</Label>
+            <Field
+              id="company"
+              className="form-control"
+              type="text"
+              name="company"
+            />
+            <ErrorMessage name="company" component="div" />
+          </FormGroup>
+
+          <FormGroup>
+            <Label for="location">Location:</Label>
+            <Field
+              id="location"
+              className="form-control"
+              type="text"
+              name="location"
+            />
+            <ErrorMessage name="location" component="div" />
+          </FormGroup>
+
+          <FormGroup>
+            <Label for="position">Position:</Label>
+            <Field
+              id="position"
+              className="form-control"
+              type="text"
+              name="position"
+            />
+            <ErrorMessage name="position" component="div" />
+          </FormGroup>
+
+          <FormGroup>
+            <Label for="description">Description:</Label>
+            <Field
+              id="description"
+              className="form-control"
+              type="textarea"
+              name="description"
+              component="textarea"
+            />
+            <ErrorMessage name="description" component="div" />
+          </FormGroup>
+
+          <FormGroup>
+            <Label for="startDate">Started at:</Label>
+            <Field
+              id="startDate"
+              className="form-control"
+              type="text"
+              name="startDate"
+            />
+            <ErrorMessage name="startDate" component="div" />
+          </FormGroup>
+
+          <FormGroup>
+            <Label for="endDate">Ended at:</Label>
+            <Field
+              id="endDate"
+              className="form-control"
+              type="text"
+              name="endDate"
+            />
+            <ErrorMessage name="endDate" component="div" />
+          </FormGroup>
+
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
