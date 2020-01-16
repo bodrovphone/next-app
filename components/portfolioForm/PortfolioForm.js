@@ -2,6 +2,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button, FormGroup, Label } from "reactstrap";
+import PortfolioInput from "./PortfolioInput";
 
 const validateInputs = values => {
   const errors = {};
@@ -37,87 +38,71 @@ const PortfolioForm = props => (
     >
       {({ isSubmitting }) => (
         <Form>
-          <FormGroup>
-            <Label for="title">Title:</Label>
-            <Field
-              id="title"
-              className="form-control"
-              type="text"
-              name="title"
-            />
-            <ErrorMessage name="title" component="div" />
-          </FormGroup>
+          <Field
+            id="title"
+            type="text"
+            name="title"
+            label="Title:"
+            component={PortfolioInput}
+          />
 
-          <FormGroup>
-            <Label for="company">Company:</Label>
-            <Field
-              id="company"
-              className="form-control"
-              type="text"
-              name="company"
-            />
-            <ErrorMessage name="company" component="div" />
-          </FormGroup>
+          <Field
+            id="company"
+            className="form-control"
+            type="text"
+            name="company"
+            label="Company:"
+            component={PortfolioInput}
+          />
 
-          <FormGroup>
-            <Label for="location">Location:</Label>
-            <Field
-              id="location"
-              className="form-control"
-              type="text"
-              name="location"
-            />
-            <ErrorMessage name="location" component="div" />
-          </FormGroup>
+          <Field
+            id="location"
+            className="form-control"
+            type="text"
+            name="location"
+            label="Location:"
+            component={PortfolioInput}
+          />
 
-          <FormGroup>
-            <Label for="position">Position:</Label>
-            <Field
-              id="position"
-              className="form-control"
-              type="text"
-              name="position"
-            />
-            <ErrorMessage name="position" component="div" />
-          </FormGroup>
+          <Field
+            id="position"
+            className="form-control"
+            type="text"
+            name="position"
+            label="Position:"
+            component={PortfolioInput}
+          />
 
-          <FormGroup>
-            <Label for="description">Description:</Label>
-            <Field
-              id="description"
-              className="form-control"
-              type="textarea"
-              name="description"
-              component="textarea"
-            />
-            <ErrorMessage name="description" component="div" />
-          </FormGroup>
+          <Field
+            id="description"
+            className="form-control"
+            type="textarea"
+            name="description"
+            label="Description:"
+            component={PortfolioInput}
+          />
 
-          <FormGroup>
-            <Label for="startDate">Started at:</Label>
-            <Field
-              id="startDate"
-              className="form-control"
-              type="text"
-              name="startDate"
-            />
-            <ErrorMessage name="startDate" component="div" />
-          </FormGroup>
+          <Field
+            id="startDate"
+            className="form-control"
+            type="text"
+            name="startDate"
+            label="Started at:"
+            component={PortfolioInput}
+          />
 
-          <FormGroup>
-            <Label for="endDate">Ended at:</Label>
-            <Field
-              id="endDate"
-              className="form-control"
-              type="text"
-              name="endDate"
-            />
-            <ErrorMessage name="endDate" component="div" />
-          </FormGroup>
+          <Field
+            id="endDate"
+            className="form-control"
+            type="text"
+            name="endDate"
+            label="Ended at:"
+            component={PortfolioInput}
+          />
 
-          <button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting}>
             Submit
-          </button>
+          </Button>
         </Form>
       )}
     </Formik>
