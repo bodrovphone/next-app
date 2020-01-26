@@ -25,6 +25,11 @@ body {
   position: absolute !important;
 }
 
+.error {
+  font-weight: 700;
+  color: red;
+}
+
 .clickable {
   cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { Button, FormGroup, Label, Input } from "reactstrap";
+import { FormGroup, Label, Input } from "reactstrap";
 
 const PortfolioInput = ({
   label,
@@ -7,13 +7,12 @@ const PortfolioInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => (
-  <FormGroup>
-    <Label for={props.id}>{label}</Label>
-    <Input type={type} {...field} {...props} />
-    {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
-    )}
-  </FormGroup>
-);
-
+    <FormGroup>
+      <Label for={props.id}>{label}</Label>
+      <Input type={type} {...field} {...props} />
+      {touched[field.name] && errors[field.name] && (
+        <div className="error">{errors[field.name]}</div>
+      )}
+    </FormGroup>
+  );
 export default PortfolioInput;

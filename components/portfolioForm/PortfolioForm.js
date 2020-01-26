@@ -1,16 +1,18 @@
 // Render Prop
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Button, FormGroup, Label } from "reactstrap";
+import { Formik, Form, Field } from "formik";
+import { Button } from "reactstrap";
 import PortfolioInput from "./PortfolioInput";
 
 const validateInputs = values => {
   const errors = {};
-  // if (!values.email) {
-  //   errors.email = "Required";
-  // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-  //   errors.email = "Invalid email address";
-  // }
+
+  Object.keys(values)
+    .forEach(key => {
+      if (!values[key]) {
+        errors[key] = `${key} is required field!`
+      }
+    })
 
   return errors;
 };
