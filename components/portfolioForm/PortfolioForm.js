@@ -3,6 +3,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { Button } from "reactstrap";
 import PortfolioInput from "./PortfolioInput";
+import PortfolioDate from './PortfolioDate';
 
 const validateInputs = values => {
   const errors = {};
@@ -86,20 +87,16 @@ const PortfolioForm = props => (
 
           <Field
             id="startDate"
-            className="form-control"
-            type="text"
             name="startDate"
             label="Started at:"
-            component={PortfolioInput}
+            component={PortfolioDate}
           />
 
           <Field
             id="endDate"
-            className="form-control"
-            type="text"
             name="endDate"
             label="Ended at:"
-            component={PortfolioInput}
+            component={PortfolioDate}
           />
 
           <Button type="submit" disabled={isSubmitting}>
