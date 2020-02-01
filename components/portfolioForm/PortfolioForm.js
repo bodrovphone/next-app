@@ -3,17 +3,19 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { Button } from "reactstrap";
 import PortfolioInput from "./PortfolioInput";
-import PortfolioDate from './PortfolioDate';
+import PortfolioDate from "./PortfolioDate";
 
 const validateInputs = values => {
   const errors = {};
 
-  Object.keys(values)
-    .forEach(key => {
-      if (!values[key]) {
-        errors[key] = `${key} is required field!`
-      }
-    })
+  Object.keys(values).forEach(key => {
+    if (
+      !values[key] &&
+      (values[key] === "startDate" || values[key] === "endDate")
+    ) {
+      errors[key] = `${key} is required field!`;
+    }
+  });
 
   return errors;
 };
