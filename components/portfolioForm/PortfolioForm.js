@@ -15,6 +15,11 @@ const validateInputs = values => {
     ) {
       errors[key] = `${key} is required field!`;
     }
+
+    const { startDate, endDate } = values;
+    if (startDate && endDate && endDate.isBefore(startDate)) {
+      errors.endDate = `End can't be before start date!`;
+    }
   });
 
   return errors;
@@ -98,6 +103,7 @@ const PortfolioForm = props => (
             id="endDate"
             name="endDate"
             label="Ended at:"
+            canBeDisabled={true}
             component={PortfolioDate}
           />
 
