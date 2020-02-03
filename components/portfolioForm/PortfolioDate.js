@@ -12,8 +12,10 @@ class PortfolioDate extends React.Component {
   };
 
   setFiledValueAndTouched = (date, touched) => {
-    const { setFieldValue, setFieldTouched } = this.props.form;
-    const { name } = this.props.field;
+    const {
+      form: { setFieldValue, setFieldTouched },
+      field: { name }
+    } = this.props;
 
     setFieldValue(name, date, true);
     setFieldTouched(name, touched, true);
@@ -39,7 +41,6 @@ class PortfolioDate extends React.Component {
       label,
       field,
       canBeDisabled,
-
       form: { touched, errors }
     } = this.props;
     const { isHidden, dateValue } = this.state;

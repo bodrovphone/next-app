@@ -1,10 +1,12 @@
 const express = require("express");
 const next = require("next");
+const mongoose = require("mongoose");
 
 // SERVICES
 
 const authService = require("./services/auth");
-const checkRole = require("./services/auth");
+
+const config = require("./config");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -14,6 +16,13 @@ const secretData = [
   { title: "SecretData 1", description: "Plans how to build spaceship" },
   { title: "SecretData 2", description: "My secret data" }
 ];
+
+mongoose
+  .connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(data => {
+    console.log("COnnected to mongo");
+  })
+  .catch(e => console.log(e));
 
 app
   .prepare()

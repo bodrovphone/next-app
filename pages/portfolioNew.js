@@ -8,6 +8,10 @@ import { Col, Row } from "reactstrap";
 import PortfolioForm from "../components/portfolioForm/PortfolioForm";
 
 class PortfolioNew extends Component {
+  savePortfolio = portfolioValues => {
+    alert(JSON.stringify(portfolioValues, null, 2));
+  };
+
   render() {
     return (
       <BaseLayout {...this.props.auth}>
@@ -17,7 +21,10 @@ class PortfolioNew extends Component {
         >
           <Row>
             <Col md="6">
-              <PortfolioForm onClick={vars => console.log(...vars)} />
+              <PortfolioForm
+                onClick={vars => console.log(...vars)}
+                onSubmit={this.savePortfolio}
+              />
             </Col>
           </Row>
         </BasePage>
