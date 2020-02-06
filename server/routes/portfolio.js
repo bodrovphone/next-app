@@ -17,4 +17,18 @@ router.get(
   controllers.getPortfolios
 );
 
+router.patch(
+  "/:id",
+  authService.checkJWT,
+  authService.checkRole("siteOwner"),
+  controllers.updatePortfolio
+);
+
+router.delete(
+  "/:id",
+  authService.checkJWT,
+  authService.checkRole("siteOwner"),
+  controllers.deletePortfolio
+);
+
 module.exports = router;
