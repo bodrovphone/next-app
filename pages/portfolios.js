@@ -8,6 +8,7 @@ import {
   CardText,
   CardBody,
   CardTitle,
+  CardSubtitle,
   CardHeader,
   Row,
   Col
@@ -38,6 +39,7 @@ export default class Portfolios extends Component {
               <CardTitle className="portfolio-card-title">
                 {portfolio.title}
               </CardTitle>
+              <CardSubtitle>{portfolio.company}</CardSubtitle>
               <CardText className="portfolio-card-description">
                 {portfolio.description}
               </CardText>

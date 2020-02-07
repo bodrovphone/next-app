@@ -3,6 +3,7 @@ import BaseLayout from "../components/layouts/BaseLayout";
 import BasePage from "../components/BasePage";
 import withAuth from "../components/hoc/withAuth";
 import { createPortfolio } from "../actions";
+import Router from "next/router";
 
 import { Col, Row } from "reactstrap";
 
@@ -17,13 +18,18 @@ class PortfolioNew extends Component {
     };
   }
 
-  savePortfolio = portfolioValues => {
+  savePortfolio = (portfolioValues, { setSubmitting }) => {
+    setSubmitting(true);
     createPortfolio(portfolioValues)
       .then(portfolio => {
+        setSubmitting(false);
         this.setState({ error: undefined });
+        Router.push("/portfolios");
       })
       .catch(e => {
-        this.setState({ error: e.message });
+        setSubmitting(false);
+        let error = e.message || "server fucking error";
+        this.setState({ error });
       });
   };
 

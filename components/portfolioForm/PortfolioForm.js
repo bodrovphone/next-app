@@ -9,16 +9,13 @@ const validateInputs = values => {
   const errors = {};
 
   Object.keys(values).forEach(key => {
-    if (
-      !values[key] &&
-      (values[key] === "startDate" || values[key] === "endDate")
-    ) {
+    if (!values[key] && key !== "endDate") {
       errors[key] = `${key} is required field!`;
     }
 
     const { startDate, endDate } = values;
     if (startDate && endDate && endDate.isBefore(startDate)) {
-      errors.endDate = `End can't be before start date!`;
+      errors.endDate = `End date can't be before start date!`;
     }
   });
 
