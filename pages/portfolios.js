@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
 import BaseLayout from "../components/layouts/BaseLayout";
-import Link from "next/link";
 import BasePage from "../components/BasePage";
+import { getPorfolios } from "../actions";
+
 import {
   Card,
   CardText,
@@ -15,32 +15,31 @@ import {
 
 export default class Portfolios extends Component {
   static async getInitialProps() {
-    let posts;
+    let portfolios;
     try {
-      posts = await axios
-        .get("https://jsonplaceholder.typicode.com/posts")
-        .then(response => response.data.splice(0, 10));
+      portfolios = await getPorfolios();
     } catch (err) {
       err => console.log(err);
     }
-    return { posts };
+    console.log("PORTFOLIOS MATHA FACA", portfolios);
+    return { portfolios };
   }
 
-  renderPosts = posts => {
-    return posts.map((post, index) => (
+  renderPortfolios = portfolios => {
+    return portfolios.map((portfolio, index) => (
       <Col md="4" key={index}>
         <span>
           <Card className="portfolio-card">
             <CardHeader className="portfolio-card-header">
-              Some Position {index}
+              {portfolio.position}
             </CardHeader>
             <CardBody>
-              <p className="portfolio-card-city"> Some Location {index} </p>
+              <p className="portfolio-card-city"> {portfolio.location} </p>
               <CardTitle className="portfolio-card-title">
-                Some Company {index}
+                {portfolio.title}
               </CardTitle>
-              <CardText className="portfolio-card-text">
-                Some Description {index}
+              <CardText className="portfolio-card-description">
+                {portfolio.description}
               </CardText>
               <div className="readMore"> </div>
             </CardBody>
@@ -51,11 +50,11 @@ export default class Portfolios extends Component {
   };
 
   render() {
-    const { posts } = this.props;
+    const { portfolios } = this.props;
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage className="portfolio-page" title="Portfolios">
-          <Row>{this.renderPosts(posts)}</Row>
+          <Row>{this.renderPortfolios(portfolios)}</Row>
         </BasePage>
       </BaseLayout>
     );
