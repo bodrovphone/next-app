@@ -26,6 +26,16 @@ export const getSecretData = async req => {
     .then(res => res.data);
 };
 
+const handleErrorPromise = resError => {
+  let error = {};
+  if (resError && resError.response && resError.response.data) {
+    error = resError.response.data;
+  } else {
+    error = resError;
+  }
+  return Promise.reject(error);
+};
+
 export const getPorfolios = async req => {
   return await axiosInstance.get("/portfolio").then(res => res.data);
 };
@@ -33,5 +43,6 @@ export const getPorfolios = async req => {
 export const createPortfolio = async data => {
   return await axiosInstance
     .post("/portfolio", data, getAuthCookie())
-    .then(res => res.data);
+    .then(res => res.data)
+    .catch(error => handleErrorPromise(error));
 };

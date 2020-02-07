@@ -9,12 +9,22 @@ import { Col, Row } from "reactstrap";
 import PortfolioForm from "../components/portfolioForm/PortfolioForm";
 
 class PortfolioNew extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      error: undefined
+    };
+  }
+
   savePortfolio = portfolioValues => {
     createPortfolio(portfolioValues)
       .then(portfolio => {
-        console.log(portfolio);
+        this.setState({ error: undefined });
       })
-      .catch(e => console.log(e));
+      .catch(e => {
+        this.setState({ error: e.message });
+      });
   };
 
   render() {
@@ -29,6 +39,7 @@ class PortfolioNew extends Component {
               <PortfolioForm
                 onClick={vars => console.log(...vars)}
                 onSubmit={this.savePortfolio}
+                error={this.state.error}
               />
             </Col>
           </Row>

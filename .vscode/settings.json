@@ -4,7 +4,6 @@
   "workbench.colorTheme": "Monokai",
   "editor.renderWhitespace": "all",
   "editor.tabSize": 2,
-  "search.location": "sidebar",
   "window.zoomLevel": 0,
   "terminal.integrated.shell.osx": "zsh",
   "breadcrumbs.enabled": true,
