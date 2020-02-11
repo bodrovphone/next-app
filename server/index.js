@@ -35,7 +35,8 @@ app
     server.use(bodyParser.json());
 
     server.use("/api/v1/book", bookRoutes);
-    server.use("/api/v1/portfolio", portfolioRoutes);
+    // server.use("/api/v1/portfolio", portfolioRoutes);
+    server.use("/api/v1/portfolios", portfolioRoutes);
 
     server.get("/api/v1/secret", authService.checkJWT, (req, res) => {
       return res.json(secretData);

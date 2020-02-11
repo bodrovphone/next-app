@@ -9,6 +9,17 @@ exports.getPortfolios = (req, res) => {
     return res.json(allPortfolios);
   });
 };
+
+exports.getPortfolioById = (req, res) => {
+  const portfolioId = req.params.id;
+  Portfolio.findById(portfolioId, (error, foundPortfolio) => {
+    if (error) {
+      return res.status(422).send(error);
+    }
+    return res.json(foundPortfolio);
+  });
+};
+
 exports.savePortfolio = (req, res) => {
   const portfolioData = req.body;
   const userId = req.user.sub;
@@ -44,7 +55,7 @@ exports.updatePortfolio = (req, res) => {
 exports.deletePortfolio = (req, res) => {
   const portfolioId = req.params.id;
 
-  Portfolio.deleteOne({ _id: portfolioId }, (err, deletedPortfolio) => {
+  Portfolio.deleteOne({ _id: portfolioId }, err => {
     if (err) {
       return res.status(422).send(err);
     }

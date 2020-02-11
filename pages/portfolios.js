@@ -22,7 +22,7 @@ export default class Portfolios extends Component {
     } catch (err) {
       err => console.log(err);
     }
-    console.log("PORTFOLIOS MATHA FACA", portfolios);
+    // console.log("PORTFOLIOS MATHA FACA", portfolios);
     return { portfolios };
   }
 

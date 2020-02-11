@@ -36,8 +36,12 @@ const handleErrorPromise = resError => {
   return Promise.reject(error);
 };
 
-export const getPorfolios = async req => {
+export const getPorfolios = async () => {
   return await axiosInstance.get("/portfolio").then(res => res.data);
+};
+
+export const getPorfolioById = async id => {
+  return axiosInstance.get(`/portfolios/portfolio${id}`).then(res => res.data);
 };
 
 export const createPortfolio = async data => {

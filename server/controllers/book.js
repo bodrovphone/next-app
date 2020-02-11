@@ -43,7 +43,7 @@ exports.updateBook = (req, res) => {
 exports.deleteBook = (req, res) => {
   const bookId = req.params.id;
 
-  Book.deleteOne({ _id: bookId }, (err, deletedBook) => {
+  Book.deleteOne({ _id: bookId }, err => {
     if (err) {
       return res.status(422).send(err);
     }

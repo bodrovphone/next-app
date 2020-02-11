@@ -19,6 +19,8 @@ router.patch(
   controllers.updatePortfolio
 );
 
+router.get("/:id", controllers.getPortfolioById);
+
 router.delete(
   "/:id",
   authService.checkJWT,
