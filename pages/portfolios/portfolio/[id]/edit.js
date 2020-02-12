@@ -26,7 +26,7 @@ class edit extends Component {
       // console.error(err);
     }
     console.log(portfolio, " I AM GRUT");
-    return portfolio;
+    return { portfolio };
   }
 
   savePortfolio = (portfolioValues, { setSubmitting }) => {
@@ -45,6 +45,7 @@ class edit extends Component {
   };
 
   render() {
+    const { portfolio } = this.props;
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage
@@ -54,6 +55,7 @@ class edit extends Component {
           <Row>
             <Col md="6">
               <PortfolioForm
+                initialValues={portfolio}
                 onClick={vars => console.log(...vars)}
                 onSubmit={this.savePortfolio}
                 error={this.state.error}

@@ -5,8 +5,6 @@ exports.getPortfolios = (req, res) => {
     if (err) {
       return res.status(422).send(err);
     }
-    debugger;
-    console.log(allPortfolios);
     return res.json(allPortfolios);
   });
 };

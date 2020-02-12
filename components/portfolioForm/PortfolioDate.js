@@ -6,10 +6,14 @@ import { FormGroup, Label, Button } from "reactstrap";
 import "react-datepicker/dist/react-datepicker.css";
 
 class PortfolioDate extends React.Component {
-  state = {
-    dateValue: moment(),
-    isHidden: false
-  };
+  constructor(props) {
+    super(props);
+    const dateValue = props.initialDate ? moment(props.initialDate) : moment();
+    this.state = {
+      dateValue,
+      isHidden: false
+    };
+  }
 
   setFiledValueAndTouched = (date, touched) => {
     const {
