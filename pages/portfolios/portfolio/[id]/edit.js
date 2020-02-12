@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import BaseLayout from "../../../components/layouts/BaseLayout";
-import BasePage from "../../../components/BasePage";
-import withAuth from "../../../components/hoc/withAuth";
-import { createPortfolio, getPorfolioById } from "../../../actions";
+import BaseLayout from "../../../../components/layouts/BaseLayout";
+import BasePage from "../../../../components/BasePage";
+import { createPortfolio, getPorfolioById } from "../../../../actions";
 import Router from "next/router";
 
 import { Col, Row } from "reactstrap";
 
-import PortfolioForm from "../../../components/portfolioForm/PortfolioForm";
+import PortfolioForm from "../../../../components/portfolioForm/PortfolioForm";
 
 class edit extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class edit extends Component {
   savePortfolio = (portfolioValues, { setSubmitting }) => {
     setSubmitting(true);
     createPortfolio(portfolioValues)
-      .then(portfolio => {
+      .then(() => {
         setSubmitting(false);
         this.setState({ error: undefined });
         Router.push("/portfolios");

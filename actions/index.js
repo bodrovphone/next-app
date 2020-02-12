@@ -41,7 +41,7 @@ export const getPorfolios = async () => {
 };
 
 export const getPorfolioById = async id => {
-  return axiosInstance.get(`/portfolios/portfolio${id}`).then(res => res.data);
+  return axiosInstance.get(`/portfolios/portfolio/${id}`).then(res => res.data);
 };
 
 export const createPortfolio = async data => {
