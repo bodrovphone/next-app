@@ -4,7 +4,7 @@ const controllers = require("../controllers/portfolio");
 const authService = require("../services/auth");
 
 router.post(
-  "",
+  "/portfolio",
   authService.checkJWT,
   authService.checkRole("siteOwner"),
   controllers.savePortfolio

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BaseLayout from "../components/layouts/BaseLayout";
 import BasePage from "../components/BasePage";
-import { getPorfolios } from "../actions";
+import { getPortfolios } from "../actions";
 
 import {
   Card,
@@ -18,7 +18,7 @@ export default class Portfolios extends Component {
   static async getInitialProps() {
     let portfolios;
     try {
-      portfolios = await getPorfolios();
+      portfolios = await getPortfolios();
     } catch (err) {
       err => console.log(err);
     }

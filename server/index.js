@@ -24,7 +24,7 @@ const secretData = [
 mongoose
   .connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(data => {
-    console.log("COnnected to mongo");
+    console.log("Connected to mongo");
   })
   .catch(e => console.log(e));
 

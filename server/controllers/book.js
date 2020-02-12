@@ -1,6 +1,6 @@
 const Book = require("../models/book");
 
-exports.getBooks = (req, res) => {
+exports.getBooks = res => {
   Book.find({}, (err, allBooks) => {
     if (err) {
       return res.status(422).send(err);
