@@ -11,12 +11,15 @@ exports.getPortfolios = (req, res) => {
 
 exports.getPortfolioById = (req, res) => {
   const portfolioId = req.params.id;
-  Portfolio.findById(portfolioId, (error, foundPortfolio) => {
-    if (error) {
-      return res.status(422).send(error);
-    }
-    return res.json(foundPortfolio);
-  });
+
+  Portfolio.findById(portfolioId)
+    .select("-__v")
+    .exec((error, foundPortfolio) => {
+      if (error) {
+        return res.status(422).send(error);
+      }
+      return res.json(foundPortfolio);
+    });
 };
 
 exports.savePortfolio = (req, res) => {
