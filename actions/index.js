@@ -50,3 +50,10 @@ export const createPortfolio = async data => {
     .then(res => res.data)
     .catch(error => handleErrorPromise(error));
 };
+
+export const updatePortfolio = async data => {
+  return await axiosInstance
+    .patch(`/portfolios/portfolio/${data._id}`, data, getAuthCookie())
+    .then(res => res.data)
+    .catch(error => handleErrorPromise(error));
+};

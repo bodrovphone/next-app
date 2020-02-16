@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BaseLayout from "../../../../components/layouts/BaseLayout";
 import BasePage from "../../../../components/BasePage";
-import { createPortfolio, getPorfolioById } from "../../../../actions";
+import { updatePortfolio, getPorfolioById } from "../../../../actions";
 import Router from "next/router";
 
 import { Col, Row } from "reactstrap";
@@ -29,9 +29,9 @@ class edit extends Component {
     return { portfolio };
   }
 
-  savePortfolio = (portfolioValues, { setSubmitting }) => {
+  updateP = (portfolioValues, { setSubmitting }) => {
     setSubmitting(true);
-    createPortfolio(portfolioValues)
+    updatePortfolio(portfolioValues)
       .then(() => {
         setSubmitting(false);
         this.setState({ error: undefined });
@@ -48,16 +48,13 @@ class edit extends Component {
     const { portfolio } = this.props;
     return (
       <BaseLayout {...this.props.auth}>
-        <BasePage
-          className="portfolio-create -page"
-          title="Create New Portfolio"
-        >
+        <BasePage className="portfolio-create -page" title="Update Portfolio">
           <Row>
             <Col md="6">
               <PortfolioForm
                 initialValues={portfolio}
                 onClick={vars => console.log(...vars)}
-                onSubmit={this.savePortfolio}
+                onSubmit={this.updateP}
                 error={this.state.error}
               />
             </Col>

@@ -13,7 +13,7 @@ router.post(
 router.get("", controllers.getPortfolios);
 
 router.patch(
-  "/:id",
+  "/portfolio/:id",
   authService.checkJWT,
   authService.checkRole("siteOwner"),
   controllers.updatePortfolio
