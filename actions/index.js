@@ -36,13 +36,24 @@ const handleErrorPromise = resError => {
   return Promise.reject(error);
 };
 
-export const getPorfolios = async req => {
-  return await axiosInstance.get("/portfolio").then(res => res.data);
+export const getPortfolios = async () => {
+  return await axiosInstance.get("/portfolios").then(res => res.data);
+};
+
+export const getPorfolioById = async id => {
+  return axiosInstance.get(`/portfolios/portfolio/${id}`).then(res => res.data);
 };
 
 export const createPortfolio = async data => {
   return await axiosInstance
-    .post("/portfolio", data, getAuthCookie())
+    .post("/portfolios/portfolio", data, getAuthCookie())
+    .then(res => res.data)
+    .catch(error => handleErrorPromise(error));
+};
+
+export const updatePortfolio = async data => {
+  return await axiosInstance
+    .patch(`/portfolios/portfolio/${data._id}`, data, getAuthCookie())
     .then(res => res.data)
     .catch(error => handleErrorPromise(error));
 };

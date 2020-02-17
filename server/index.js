@@ -24,7 +24,7 @@ const secretData = [
 mongoose
   .connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(data => {
-    console.log("COnnected to mongo");
+    console.log("Connected to mongo");
   })
   .catch(e => console.log(e));
 
@@ -35,7 +35,8 @@ app
     server.use(bodyParser.json());
 
     server.use("/api/v1/book", bookRoutes);
-    server.use("/api/v1/portfolio", portfolioRoutes);
+    // server.use("/api/v1/portfolio", portfolioRoutes);
+    server.use("/api/v1/portfolios", portfolioRoutes);
 
     server.get("/api/v1/secret", authService.checkJWT, (req, res) => {
       return res.json(secretData);

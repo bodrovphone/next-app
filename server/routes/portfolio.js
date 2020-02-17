@@ -4,7 +4,7 @@ const controllers = require("../controllers/portfolio");
 const authService = require("../services/auth");
 
 router.post(
-  "",
+  "/portfolio",
   authService.checkJWT,
   authService.checkRole("siteOwner"),
   controllers.savePortfolio
@@ -13,11 +13,13 @@ router.post(
 router.get("", controllers.getPortfolios);
 
 router.patch(
-  "/:id",
+  "/portfolio/:id",
   authService.checkJWT,
   authService.checkRole("siteOwner"),
   controllers.updatePortfolio
 );
+
+router.get("/portfolio/:id", controllers.getPortfolioById);
 
 router.delete(
   "/:id",

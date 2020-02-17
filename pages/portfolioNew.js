@@ -9,6 +9,15 @@ import { Col, Row } from "reactstrap";
 
 import PortfolioForm from "../components/portfolioForm/PortfolioForm";
 
+const INITIAL_VALUES = {
+  title: "",
+  company: "",
+  location: "",
+  position: "",
+  startDate: "",
+  endDate: ""
+};
+
 class PortfolioNew extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +52,7 @@ class PortfolioNew extends Component {
           <Row>
             <Col md="6">
               <PortfolioForm
+                initialValues={INITIAL_VALUES}
                 onClick={vars => console.log(...vars)}
                 onSubmit={this.savePortfolio}
                 error={this.state.error}

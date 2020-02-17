@@ -22,22 +22,13 @@ const validateInputs = values => {
   return errors;
 };
 
-const INITIAL_VALUES = {
-  title: "",
-  company: "",
-  location: "",
-  position: "",
-  startDate: "",
-  endDate: ""
-};
-
-const PortfolioForm = props => {
+const PortfolioForm = ({ initialValues, onSubmit, error }) => {
   return (
     <div>
       <Formik
-        initialValues={INITIAL_VALUES}
+        initialValues={initialValues}
         validate={validateInputs}
-        onSubmit={props.onSubmit}
+        onSubmit={onSubmit}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -90,6 +81,7 @@ const PortfolioForm = props => {
               name="startDate"
               label="Started at:"
               component={PortfolioDate}
+              initialDate={initialValues.startDate}
             />
 
             <Field
@@ -98,9 +90,10 @@ const PortfolioForm = props => {
               label="Ended at:"
               canBeDisabled={true}
               component={PortfolioDate}
+              initialDate={initialValues.endDate}
             />
 
-            {props.error && <Alert color="danger">{props.error}</Alert>}
+            {error && <Alert color="danger">{error}</Alert>}
             <Button
               color="success"
               size="lg"

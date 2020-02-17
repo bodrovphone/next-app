@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import BaseLayout from "../components/layouts/BaseLayout";
 import BasePage from "../components/BasePage";
-import { getPorfolios } from "../actions";
+import { getPortfolios } from "../actions";
+import Router from "next/router";
 
 import {
   Card,
@@ -11,18 +12,19 @@ import {
   CardSubtitle,
   CardHeader,
   Row,
-  Col
+  Col,
+  Button
 } from "reactstrap";
 
 export default class Portfolios extends Component {
   static async getInitialProps() {
     let portfolios;
     try {
-      portfolios = await getPorfolios();
+      portfolios = await getPortfolios();
     } catch (err) {
       err => console.log(err);
     }
-    console.log("PORTFOLIOS MATHA FACA", portfolios);
+    // console.log("PORTFOLIOS MATHA FACA", portfolios);
     return { portfolios };
   }
 
@@ -43,7 +45,21 @@ export default class Portfolios extends Component {
               <CardText className="portfolio-card-description">
                 {portfolio.description}
               </CardText>
-              <div className="readMore"> </div>
+              <div className="readMore">...</div>
+              {
+                <React.Fragment>
+                  <Button
+                    onClick={() =>
+                      Router.push(`/portfolios/portfolio/${portfolio._id}/edit`)
+                    }
+                    color="warning"
+                  >
+                    {" "}
+                    Edit
+                  </Button>{" "}
+                  <Button color="danger">Delete</Button>
+                </React.Fragment>
+              }
             </CardBody>
           </Card>
         </span>
@@ -56,6 +72,13 @@ export default class Portfolios extends Component {
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage className="portfolio-page" title="Portfolios">
+          <Button
+            onClick={() => Router.push("/portfolioNew")}
+            className="create-btn"
+            color="success"
+          >
+            Create Portfolio
+          </Button>
           <Row>{this.renderPortfolios(portfolios)}</Row>
         </BasePage>
       </BaseLayout>
