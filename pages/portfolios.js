@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import BaseLayout from "../components/layouts/BaseLayout";
 import BasePage from "../components/BasePage";
-import { getPortfolios } from "../actions";
+import {
+  getPortfolios,
+  deletePortfolio as deletePortfolioAction
+} from "../actions";
 import Router from "next/router";
 
 import {
@@ -28,7 +31,25 @@ export default class Portfolios extends Component {
     return { portfolios };
   }
 
+  displayDeleteWarning = portfolioId => {
+    const confirmed = window.confirm("U sure want to delete this ah?");
+    if (confirmed) {
+      // delete portfolio here
+      this.deletePortfolioMethod(portfolioId);
+    }
+  };
+
+  deletePortfolioMethod = portfolioId => {
+    deletePortfolioAction(portfolioId)
+      .then(() => {
+        // decide what to do next?
+        console.log("DELETED");
+        Router.push("/portfolios");
+      })
+      .catch(e => console.log(e));
+  };
   renderPortfolios = portfolios => {
+    const { isAuthenticated, isSiteOwner } = this.props.auth;
     return portfolios.map((portfolio, index) => (
       <Col md="4" key={index}>
         <span>
@@ -46,7 +67,7 @@ export default class Portfolios extends Component {
                 {portfolio.description}
               </CardText>
               <div className="readMore">...</div>
-              {
+              {isAuthenticated && isSiteOwner && (
                 <React.Fragment>
                   <Button
                     onClick={() =>
@@ -57,9 +78,14 @@ export default class Portfolios extends Component {
                     {" "}
                     Edit
                   </Button>{" "}
-                  <Button color="danger">Delete</Button>
+                  <Button
+                    color="danger"
+                    onClick={() => this.displayDeleteWarning(portfolio._id)}
+                  >
+                    Delete
+                  </Button>
                 </React.Fragment>
-              }
+              )}
             </CardBody>
           </Card>
         </span>
@@ -68,17 +94,22 @@ export default class Portfolios extends Component {
   };
 
   render() {
-    const { portfolios } = this.props;
+    const {
+      portfolios,
+      auth: { isAuthenticated, isSiteOwner }
+    } = this.props;
     return (
       <BaseLayout {...this.props.auth}>
         <BasePage className="portfolio-page" title="Portfolios">
-          <Button
-            onClick={() => Router.push("/portfolioNew")}
-            className="create-btn"
-            color="success"
-          >
-            Create Portfolio
-          </Button>
+          {isAuthenticated && isSiteOwner && (
+            <Button
+              onClick={() => Router.push("/portfolioNew")}
+              className="create-btn"
+              color="success"
+            >
+              Create Portfolio
+            </Button>
+          )}
           <Row>{this.renderPortfolios(portfolios)}</Row>
         </BasePage>
       </BaseLayout>

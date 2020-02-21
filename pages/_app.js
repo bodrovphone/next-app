@@ -5,8 +5,10 @@ import Auth0Client from "../services/auth0";
 import "../styles/main.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const nameSpace = "http://localhost:3000";
+
 class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     const user = await (process.browser
       ? Auth0Client.clientAuth()
@@ -15,7 +17,10 @@ class MyApp extends App {
     if (Component.getInitialProps)
       pageProps = await Component.getInitialProps(ctx);
 
-    const auth = { user, isAuthenticated: !!user };
+    const isSiteOwner = user
+      ? user[nameSpace + "/role"] === "siteOwner"
+      : false;
+    const auth = { user, isAuthenticated: !!user, isSiteOwner };
     return { pageProps, auth };
   }
 

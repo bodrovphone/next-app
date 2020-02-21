@@ -22,7 +22,7 @@ router.patch(
 router.get("/portfolio/:id", controllers.getPortfolioById);
 
 router.delete(
-  "/:id",
+  "/portfolio/:id",
   authService.checkJWT,
   authService.checkRole("siteOwner"),
   controllers.deletePortfolio

@@ -56,6 +56,7 @@ exports.updatePortfolio = (req, res) => {
 };
 exports.deletePortfolio = (req, res) => {
   const portfolioId = req.params.id;
+  console.log(portfolioId);
 
   Portfolio.deleteOne({ _id: portfolioId }, err => {
     if (err) {
