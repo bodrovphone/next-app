@@ -9,9 +9,10 @@ class PortfolioDate extends React.Component {
   constructor(props) {
     super(props);
     const dateValue = props.initialDate ? moment(props.initialDate) : moment();
+    const isHidden = !props.initialDate;
     this.state = {
       dateValue,
-      isHidden: false
+      isHidden
     };
   }
 

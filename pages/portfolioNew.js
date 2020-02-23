@@ -4,6 +4,7 @@ import BasePage from "../components/BasePage";
 import withAuth from "../components/hoc/withAuth";
 import { createPortfolio } from "../actions";
 import Router from "next/router";
+import moment from "moment";
 
 import { Col, Row } from "reactstrap";
 
@@ -14,8 +15,8 @@ const INITIAL_VALUES = {
   company: "",
   location: "",
   position: "",
-  startDate: "",
-  endDate: ""
+  startDate: moment(),
+  endDate: moment()
 };
 
 class PortfolioNew extends Component {
