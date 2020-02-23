@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Link from "next/link";
 import Auth0Client from "../../services/auth0";
 
