@@ -11,7 +11,7 @@ const BaseLayout = props => {
         <title>Oleksandr Bodrov Blog</title>
         <script
           src="https://kit.fontawesome.com/d8626bf45c.js"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
       </Head>
       <div className="layout-container">
