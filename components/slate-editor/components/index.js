@@ -121,8 +121,12 @@ export const Menu = React.forwardRef(({ className, ...props }, ref) => (
   />
 ));
 
-export const Portal = ({ children, document }) => {
-  return document ? ReactDOM.createPortal(children, document.body) : null;
+export const Portal = ({ children }) => {
+  let portal = null;
+  if (globalThis.document) {
+    portal = ReactDOM.createPortal(children, document.body);
+  }
+  return portal;
 };
 
 export const Toolbar = React.forwardRef(({ className, ...props }, ref) => (

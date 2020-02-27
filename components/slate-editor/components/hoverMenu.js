@@ -4,7 +4,7 @@ import { Editor, Transforms, Text, createEditor } from "slate";
 import { css } from "emotion";
 import { withHistory } from "slate-history";
 
-import { Button, Icon, Menu, Portal } from "./components";
+import { Button, Icon, Menu, Portal } from ".";
 import { Range } from "slate";
 
 const HoverMenu = () => {
@@ -99,7 +99,7 @@ const HoveringToolbar = () => {
   });
 
   return (
-    <Portal document={globalThis.document}>
+    <Portal document={globalThis.document || { body: "body" }}>
       <Menu
         ref={ref}
         className={css`
