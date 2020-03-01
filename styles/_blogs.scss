@@ -166,3 +166,14 @@ blockquote {
   color: #aaa;
   font-style: italic;
 }
+
+.blog-editor-page {
+  @media screen and (min-width: 991px) {
+    .editor-wrapper {
+      padding: 0 180px;
+    }
+  }
+  p {
+    font-size: 19px;
+  }
+}

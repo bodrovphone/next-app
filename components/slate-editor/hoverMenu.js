@@ -10,10 +10,10 @@ import { Editor, Transforms, Text, createEditor } from "slate";
 import { css } from "emotion";
 import { withHistory } from "slate-history";
 
-import { Button, Icon, Menu, Portal } from ".";
+import { Button, Icon, Menu, Portal } from "./components";
 import { Range } from "slate";
 
-import initialValue from "../initialValue";
+import initialValue from "./initialValue";
 
 const toggleFormat = (editor, format) => {
   const isActive = isFormatActive(editor, format);
@@ -147,6 +147,7 @@ const BlockButton = ({ format, icon }) => {
   const editor = useSlate();
   return (
     <Button
+      reversed
       active={isBlockActive(editor, format)}
       onMouseDown={event => {
         event.preventDefault();

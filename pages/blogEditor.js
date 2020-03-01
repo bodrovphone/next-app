@@ -3,14 +3,18 @@ import BaseLayout from "../components/layouts/BaseLayout";
 import BasePage from "../components/BasePage";
 
 import withAuth from "../components/hoc/withAuth";
-import Editor from "../components/slate-editor/Editor";
+import HoverMenu from "../components/slate-editor/hoverMenu";
 
 class BlogEditor extends Component {
   render() {
     return (
       <BaseLayout {...this.props.auth}>
-        <BasePage className="blog-editor-page" title="Write your story">
-          <Editor />
+        <BasePage
+          containerClass="editor-wrapper"
+          className="blog-editor-page"
+          title="Write your story"
+        >
+          <HoverMenu />
         </BasePage>
       </BaseLayout>
     );
