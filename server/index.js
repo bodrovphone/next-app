@@ -11,6 +11,7 @@ const config = require("./config");
 
 const bookRoutes = require("./routes/book");
 const portfolioRoutes = require("./routes/portfolio");
+const BlogRoutes = require("./routes/blog");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -37,6 +38,7 @@ app
     server.use("/api/v1/book", bookRoutes);
     // server.use("/api/v1/portfolio", portfolioRoutes);
     server.use("/api/v1/portfolios", portfolioRoutes);
+    server.use("/api/v1/blogs", BlogRoutes);
 
     server.get("/api/v1/secret", authService.checkJWT, (req, res) => {
       return res.json(secretData);
