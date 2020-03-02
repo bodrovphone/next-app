@@ -2,7 +2,6 @@ const Blog = require("../models/blog");
 
 exports.createBlog = (req, res) => {
   const blogData = req.body;
-  // const userId = req.user.sub;
   const blog = new Blog(blogData);
 
   if (req.user) {
@@ -17,6 +16,17 @@ exports.createBlog = (req, res) => {
   });
 };
 
+exports.getBlogById = (req, res) => {
+  const BlogId = req.params.id;
+
+  Blog.findById(BlogId, (error, foundBlog) => {
+    if (error) {
+      return res.status(422).send(error);
+    }
+    return res.json(foundBlog);
+  });
+};
+
 // exports.getBlogs = (req, res) => {
 //   Blog.find({})
 //     .sort({ startDate: 1 })
@@ -25,19 +35,6 @@ exports.createBlog = (req, res) => {
 //         return res.status(422).send(err);
 //       }
 //       return res.json(allBlogs);
-//     });
-// };
-
-// exports.getBlogById = (req, res) => {
-//   const BlogId = req.params.id;
-
-//   Blog.findById(BlogId)
-//     .select("-__v")
-//     .exec((error, foundBlog) => {
-//       if (error) {
-//         return res.status(422).send(error);
-//       }
-//       return res.json(foundBlog);
 //     });
 // };
 

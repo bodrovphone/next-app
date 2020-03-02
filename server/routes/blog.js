@@ -10,6 +10,8 @@ router.post(
   controllers.createBlog
 );
 
+router.get("/blog/:id", controllers.getBlogById);
+
 // router.get("", controllers.getBlogs);
 
 // router.patch(
@@ -18,8 +20,6 @@ router.post(
 //   authService.checkRole("siteOwner"),
 //   controllers.updateBlog
 // );
-
-// router.get("/blog/:id", controllers.getBlogById);
 
 // router.delete(
 //   "/blog/:id",
