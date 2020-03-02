@@ -14,6 +14,7 @@ import { Button, Icon, Menu, Portal } from "./components";
 import { Range } from "slate";
 
 import initialValue from "./initialValue";
+import ControlMenu from "./ControlMenu";
 
 const toggleFormat = (editor, format) => {
   const isActive = isFormatActive(editor, format);
@@ -196,13 +197,38 @@ const FormatButton = ({ format, icon }) => {
   );
 };
 
-const HoverMenu = () => {
+const HoverMenu = props => {
   const [value, setValue] = useState(initialValue);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const renderElement = useCallback(props => <Element {...props} />, []);
 
+  const getValues = () => {
+    // this is well a subFunction-helper. Yes, I'll need to re-do it later...
+    const extractText = arr => {
+      return (
+        arr &&
+        arr.children &&
+        arr.children.reduce(
+          (accumulator, currentValue) => accumulator + currentValue.text,
+          ""
+        )
+      );
+    };
+    // Here I am getting titles from value if there are any or setting some defaults
+    const headingOne = value.find(item => item.type === "heading-one");
+    const title = extractText(headingOne) || "default title";
+    // I can use value.filter(item => item.type === "heading-one")[0] or 1,2,3 etc;
+    const headingTwo = value.find(item => item.type === "heading-two");
+    const subTitle = extractText(headingTwo) || "default subtitle";
+    // and now pass them trough to the upper component - better to use contextAPI here but I never used it...
+    props.save({
+      title,
+      subTitle
+    });
+  };
   return (
     <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+      <ControlMenu save={getValues} />
       <HoveringToolbar />
       <Editable
         renderLeaf={props => <Leaf {...props} />}
