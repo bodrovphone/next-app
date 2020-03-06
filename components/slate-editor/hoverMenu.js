@@ -226,9 +226,10 @@ const HoverMenu = props => {
       subTitle
     });
   };
+
   return (
     <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      <ControlMenu save={getValues} />
+      <ControlMenu isSaving={props.isSaving} save={getValues} />
       <HoveringToolbar />
       <Editable
         renderLeaf={props => <Leaf {...props} />}

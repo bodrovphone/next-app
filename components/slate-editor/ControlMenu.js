@@ -1,10 +1,11 @@
+import react, { useEffect } from "react";
 import { Button } from "reactstrap";
 
 const ControlMenu = props => {
   return (
     <div className="control-menu">
       <h1 className="title">Write Your Story...</h1>
-      <div className="status-box">Saved</div>
+      <div className="status-box">{props.isSaving ? "Saving..." : "Saved"}</div>
       <Button onClick={props.save} color="success">
         Save
       </Button>

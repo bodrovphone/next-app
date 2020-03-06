@@ -63,3 +63,14 @@ export const deletePortfolio = portfolioId => {
     .delete(`/portfolios/portfolio/${portfolioId}`, getAuthCookie())
     .then(response => response.data);
 };
+
+// ------------ BLOG ACTIONS ---------------
+
+export const saveBlog = blogData => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(blogData);
+      console.log("Blog is saved now, mister");
+    }, 2000);
+  });
+};
