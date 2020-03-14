@@ -16,6 +16,8 @@ import { Range } from "slate";
 import initialValue from "./initialValue";
 import ControlMenu from "./ControlMenu";
 
+import { serialize, deserialize } from "./serialize";
+
 const toggleFormat = (editor, format) => {
   const isActive = isFormatActive(editor, format);
   Transforms.setNodes(
@@ -225,6 +227,11 @@ const HoverMenu = props => {
       title,
       subTitle
     });
+
+    // imagine it would work straight away. Yay!
+    // So this one below would return me an html tag element as it is.
+    var test = serialize(headingOne);
+    debugger;
   };
 
   return (
