@@ -230,8 +230,9 @@ const HoverMenu = props => {
 
     // imagine it would work straight away. Yay!
     // So this one below would return me an html tag element as it is.
-    var test = serialize(headingOne);
-    debugger;
+    var serializedValue = value.map(serialize);
+    // debugger;
+    // Basically it would mean I don't need the above code & helpers
   };
 
   return (
