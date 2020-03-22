@@ -66,11 +66,9 @@ export const deletePortfolio = portfolioId => {
 
 // ------------ BLOG ACTIONS ---------------
 
-export const saveBlog = blogData => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(blogData);
-      console.log("Blog is saved now, mister");
-    }, 2000);
-  });
+export const createBlog = data => {
+  return axiosInstance
+    .post(`/blogs`, data, getAuthCookie())
+    .then(res => res.data)
+    .catch(err => handleErrorPromise(err));
 };

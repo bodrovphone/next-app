@@ -206,6 +206,7 @@ const HoverMenu = props => {
 
   const getValues = () => {
     // this is well a subFunction-helper. Yes, I'll need to re-do it later...
+    // or I need to completely replace it with serialize helper
     const extractText = arr => {
       return (
         arr &&
@@ -223,16 +224,20 @@ const HoverMenu = props => {
     const headingTwo = value.find(item => item.type === "heading-two");
     const subTitle = extractText(headingTwo) || "default subtitle";
     // and now pass them trough to the upper component - better to use contextAPI here but I never used it...
+    // So this one below would return me an html tag element as it is.
+    var story = value
+      .filter(item => {
+        // I mean this is bad practise. Considering the above code this DRY violation
+        // NEEDS REFACTORING
+        return item.type !== "heading-one" && item.type !== "heading-two";
+      })
+      .map(serialize)
+      .join(" ");
     props.save({
       title,
-      subTitle
+      subTitle,
+      story
     });
-
-    // imagine it would work straight away. Yay!
-    // So this one below would return me an html tag element as it is.
-    var serializedValue = value.map(serialize);
-    // debugger;
-    // Basically it would mean I don't need the above code & helpers
   };
 
   return (

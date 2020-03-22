@@ -5,18 +5,21 @@ import BasePage from "../components/BasePage";
 import withAuth from "../components/hoc/withAuth";
 import HoverMenu from "../components/slate-editor/hoverMenu";
 import ControlMenu from "../components/slate-editor/ControlMenu";
-import { saveBlog } from "../actions";
+import { createBlog } from "../actions";
 
 const BlogEditor = props => {
   const [isSaving, setIsSaving] = useState(false);
 
-  const saveBlogEditor = ({ title, subTitle }) => {
+  const saveBlogEditor = newBlog => {
     setIsSaving(true);
-    console.log("Done, mother fucker!", { title, subTitle });
-    saveBlog({ title, subTitle }).then(data => {
-      setIsSaving(false);
-      console.log(data);
-    });
+    createBlog(newBlog)
+      .then(data => {
+        setIsSaving(false);
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
   return (
     <BaseLayout {...props.auth}>
