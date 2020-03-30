@@ -3,31 +3,44 @@ import { Node, Text } from "slate";
 import { jsx } from "slate-hyperscript";
 
 // this little helper will qualify what type of leaf do I get. whether it's bold or italic or whatever...
-const leafQualifier = v => Object.keys(v).find(i => i !== "text");
+const nestedLeafQualifiers = v =>
+  Object.keys(v)
+    .filter(i => i !== "text")
+    .map(n => {
+      switch (n) {
+        case "bold":
+          return "strong";
+        case "italic":
+          return `em`;
+        case "underlined":
+          return `u`;
+        case "code":
+          return `code`;
+        default:
+          return "";
+      }
+    });
 
 const serialize = node => {
   try {
     // Here our leaves just work in the other way
     // we have nodes like {text: "some text", bold: true} or italic: true or someting. Can't use switch case here?
     if (Text.isText(node)) {
-      switch (leafQualifier(node)) {
-        case "bold":
-          return `<stong>${escapeHtml(node.text)}</strong>`;
-        case "italic":
-          return `<em>${escapeHtml(node.text)}</em>`;
-        case "underlined":
-          return `<u>${escapeHtml(node.text)}</u>`;
-        case "code":
-          return `<code>${escapeHtml(node.text)}</code>`;
-        default:
-          return escapeHtml(node.text);
+      if (nestedLeafQualifiers(node).length) {
+        let open = nestedLeafQualifiers(node)
+          .map(n => `<${n}>`)
+          .join("");
+        let close = nestedLeafQualifiers(node)
+          .map(n => `</${n}>`)
+          .reverse()
+          .join("");
+        return `${open}${node.text}${close}`;
       }
+      return node.text;
     }
 
     const children = node.children.map(n => serialize(n)).join("");
     switch (node.type) {
-      case "quote":
-        return `<blockquote><p>${children}</p></blockquote>`;
       case "paragraph":
         return `<p>${children}</p>`;
       case "link":
