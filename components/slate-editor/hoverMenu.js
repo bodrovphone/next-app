@@ -233,11 +233,12 @@ const HoverMenu = props => {
       })
       .map(serialize)
       .join(" ");
-    props.save({
-      title,
-      subTitle,
-      story
-    });
+    !props.isSaving &&
+      props.save({
+        title,
+        subTitle,
+        story
+      });
   };
 
   return (
