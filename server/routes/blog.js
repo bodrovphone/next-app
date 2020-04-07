@@ -11,6 +11,8 @@ router.post(
 );
 
 router.get("/blog/:id", controllers.getBlogById);
+router.get("/blog/:id/edit", controllers.getBlogById);
+router.get("/blog/:id/new", controllers.getBlogById);
 
 // router.get("", controllers.getBlogs);
 

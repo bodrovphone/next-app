@@ -13,7 +13,7 @@ class edit extends Component {
     super(props);
 
     this.state = {
-      error: undefined
+      error: undefined,
     };
   }
   static async getInitialProps({ query }) {
@@ -37,7 +37,7 @@ class edit extends Component {
         this.setState({ error: undefined });
         Router.push("/portfolios");
       })
-      .catch(e => {
+      .catch((e) => {
         setSubmitting(false);
         let error = e.message || "server fucking error";
         this.setState({ error });
@@ -53,7 +53,7 @@ class edit extends Component {
             <Col md="6">
               <PortfolioForm
                 initialValues={portfolio}
-                onClick={vars => console.log(...vars)}
+                onClick={(vars) => console.log(...vars)}
                 onSubmit={this.updateP}
                 error={this.state.error}
               />

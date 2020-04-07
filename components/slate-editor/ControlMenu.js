@@ -1,8 +1,8 @@
 import react, { useEffect } from "react";
 import { Button } from "reactstrap";
 
-const ControlMenu = props => {
-  const isSaving = { props };
+const ControlMenu = (props) => {
+  const { isSaving } = props;
   return (
     <div className="control-menu">
       <h1 className="title">Write Your Story...</h1>
